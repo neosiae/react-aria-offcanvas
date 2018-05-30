@@ -1,2 +1,3 @@
-# react-sliding-menu
-Sliding menu component for React
+# react-off-canvas
+
+An Off-Canvas component for React.js
