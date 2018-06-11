@@ -21,9 +21,10 @@ export default class OffCanvas extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     width: PropTypes.string,
-    right: PropTypes.bool,
+    openFromRight: PropTypes.bool,
     role: PropTypes.string,
     label: PropTypes.string,
+    labelledby: PropTypes.string,
     onClose: PropTypes.func,
     closeOnEsc: PropTypes.bool,
     closeOnOverlayClick: PropTypes.bool,
