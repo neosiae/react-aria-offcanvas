@@ -35,7 +35,7 @@ const createStyles = (defaultStyles, isOpen, width, right, customStyles) => {
         : right
           ? `translateX(${width})`
           : `translateX(-${width})`,
-      transition: 'all 0.5s',
+      transition: 'all 0.2s',
       ...customStyles.content,
       // !important
       visibility: isOpen ? 'visible' : 'hidden',
