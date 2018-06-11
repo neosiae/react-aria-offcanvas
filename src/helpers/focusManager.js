@@ -36,6 +36,7 @@ export const focusLater = () => {
 export const returnFocus = () => {
   if (lastFocusedElement) {
     lastFocusedElement.focus();
+    lastFocusedElement = null;
   }
 };
 
