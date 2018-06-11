@@ -71,8 +71,8 @@ export default class OffCanvas extends Component {
 
   open = () => {
     focusManager.focusLater();
-    this.focusContent();
     focusManager.trapFocus(this.content);
+    this.focusContent();
   };
 
   close = () => {
