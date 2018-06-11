@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "parser": "babel-eslint",
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-unused-vars": ["error", { "args": "none" }]
+  }
+}

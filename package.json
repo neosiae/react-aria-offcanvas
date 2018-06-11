@@ -1,0 +1,57 @@
+{
+  "name": "react-off-canvas",
+  "version": "0.1.0",
+  "description": "Accessible Off-Canvas component for React.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development --content-base=examples",
+    "build": "webpack --mode production",
+    "lint": "eslint src",
+    "jest": "jest",
+    "test": "npm run lint && npm run jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neosiae/react-off-canvas-menu.git"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "off-canvas"
+  ],
+  "author": "Denis Kotlica",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neosiae/react-off-canvas-menu/issues"
+  },
+  "homepage": "https://github.com/neosiae/react-off-canvas-menu#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "babel-jest": "^22.4.4",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.9.1",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.4",
+    "prettier": "^1.13.4",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "webpack": "^4.11.0",
+    "webpack-cli": "^2.1.5",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.1"
+  }
+}
