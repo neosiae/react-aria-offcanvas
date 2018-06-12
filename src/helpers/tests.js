@@ -1,4 +1,7 @@
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from 'react-testing-library';
 
-Enzyme.configure({ adapter: new Adapter() });
+export const getContent = element => {
+  const { getByTestId } = render(element);
+  const content = getByTestId('content');
+  return content;
+};

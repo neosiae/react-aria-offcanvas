@@ -141,6 +141,7 @@ export default class OffCanvas extends Component {
         style={styles.overlay}
         className={overlayClassName}
         onClick={this.handleOnOverlayClick}
+        data-testid="overlay"
       >
         <div
           ref={this.setContentRef}
@@ -152,6 +153,7 @@ export default class OffCanvas extends Component {
           aria-labelledby={labelledby}
           aria-hidden={!isOpen}
           tabIndex="-1"
+          data-testid="content"
         >
           {this.props.children}
         </div>

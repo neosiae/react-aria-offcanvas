@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OffCanvas renders correctly when closed 1`] = `
+<div
+  className={undefined}
+  data-testid="overlay"
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "rgba(255, 255, 255, 0.5)",
+      "height": "100vh",
+      "left": 0,
+      "position": "fixed",
+      "top": 0,
+      "width": "",
+      "zIndex": "900",
+    }
+  }
+>
+  <div
+    aria-hidden={true}
+    aria-label={undefined}
+    aria-labelledby={undefined}
+    className={undefined}
+    data-testid="content"
+    onKeyDown={[Function]}
+    role={undefined}
+    style={
+      Object {
+        "MozTransform": "translateX(-300px)",
+        "MsTransform": "translateX(-300px)",
+        "OTransform": "translateX(-300px)",
+        "WebkitTransform": "translateX(-300px)",
+        "background": "rgba(0, 0, 0, 0.1)",
+        "height": "100vh",
+        "left": "0",
+        "outline": 0,
+        "position": "fixed",
+        "right": "auto",
+        "transform": "translateX(-300px)",
+        "transition": "all 0.2s",
+        "transitionProperty": "",
+        "visibility": "hidden",
+        "width": "300px",
+        "zIndex": "1000",
+      }
+    }
+    tabIndex="-1"
+  />
+</div>
+`;
+
+exports[`OffCanvas renders correctly when open 1`] = `
+<div
+  className={undefined}
+  data-testid="overlay"
+  onClick={[Function]}
+  style={
+    Object {
+      "background": "rgba(255, 255, 255, 0.5)",
+      "height": "100vh",
+      "left": 0,
+      "position": "fixed",
+      "top": 0,
+      "width": "100vw",
+      "zIndex": "900",
+    }
+  }
+>
+  <div
+    aria-hidden={false}
+    aria-label={undefined}
+    aria-labelledby={undefined}
+    className={undefined}
+    data-testid="content"
+    onKeyDown={[Function]}
+    role={undefined}
+    style={
+      Object {
+        "MozTransform": "",
+        "MsTransform": "",
+        "OTransform": "",
+        "WebkitTransform": "",
+        "background": "rgba(0, 0, 0, 0.1)",
+        "height": "100vh",
+        "left": "0",
+        "outline": 0,
+        "position": "fixed",
+        "right": "auto",
+        "transform": "",
+        "transition": "all 0.2s",
+        "transitionProperty": "transform",
+        "visibility": "visible",
+        "width": "300px",
+        "zIndex": "1000",
+      }
+    }
+    tabIndex="-1"
+  />
+</div>
+`;
