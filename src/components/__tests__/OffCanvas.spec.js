@@ -3,8 +3,8 @@ import { getContent } from '../../helpers/tests';
 import OffCanvas from 'react-off-canvas';
 
 describe('OffCanvas', () => {
-  it('focuses the OffCanvas content by default', () => {
-    const content = getContent(<OffCanvas isOpen />);
+  it('focuses the OffCanvas content when open', () => {
+    const content = getContent(<OffCanvas isOpen={true} />);
     expect(document.activeElement).toBe(content);
   });
 
@@ -24,7 +24,7 @@ describe('OffCanvas', () => {
   });
 
   it('sets aria-hidden to false when open', () => {
-    const content = getContent(<OffCanvas isOpen />);
+    const content = getContent(<OffCanvas isOpen={true} />);
     expect(content.getAttribute('aria-hidden')).toBe('false');
   });
 
