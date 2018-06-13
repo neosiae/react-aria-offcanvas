@@ -1,5 +1,5 @@
 import React from 'react';
-import { getContent } from '../../helpers/tests';
+import { getContent } from '../src/helpers/tests';
 import OffCanvas from 'react-off-canvas';
 
 describe('OffCanvas', () => {
