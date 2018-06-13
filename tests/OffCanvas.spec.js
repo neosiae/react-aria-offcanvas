@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library';
 import OffCanvas from 'react-off-canvas';
-import { renderIntoDocument, cleanup, fireEvent } from 'react-testing-library';
-import { getContent } from './helpers/tests';
+import { getOverlay, getContent, extractNumber } from './helpers/tests';
 import App from './helpers/components';
 
 describe('OffCanvas', () => {
@@ -25,17 +25,29 @@ describe('OffCanvas', () => {
     cleanup();
   });
 
-  it('sets role based on the role prop', () => {
+  it('opens from the left side by default', () => {
+    const content = getContent(<OffCanvas />);
+    const value = extractNumber(content.style.transform);
+    expect(value).toBeLessThan(0);
+  });
+
+  it('opens from the right side', () => {
+    const content = getContent(<OffCanvas openFromRight={true} />);
+    const value = extractNumber(content.style.transform);
+    expect(value).toBeGreaterThan(0);
+  });
+
+  it('accepts a custom role', () => {
     const content = getContent(<OffCanvas role="dialog" />);
     expect(content.getAttribute('role')).toBe('dialog');
   });
 
-  it('sets aria-label based on the label prop', () => {
+  it('accepts a custom aria-label', () => {
     const content = getContent(<OffCanvas label="OffCanvas" />);
     expect(content.getAttribute('aria-label')).toBe('OffCanvas');
   });
 
-  it('sets aria-labelledby based on the labelledby prop', () => {
+  it('accepts a custom aria-labelledby', () => {
     const content = getContent(<OffCanvas labelledby="button" />);
     expect(content.getAttribute('aria-labelledby')).toBe('button');
   });
@@ -48,5 +60,17 @@ describe('OffCanvas', () => {
   it('sets aria-hidden to true when closed', () => {
     const content = getContent(<OffCanvas />);
     expect(content.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('accepts a custom className', () => {
+    const content = getContent(<OffCanvas className="customClassName" />);
+    expect(content.classList.contains('customClassName')).toBe(true);
+  });
+
+  it('accepts a custom overlayClassName', () => {
+    const overlay = getOverlay(
+      <OffCanvas overlayClassName="customOverlayClassName" />,
+    );
+    expect(overlay.classList.contains('customOverlayClassName')).toBe(true);
   });
 });

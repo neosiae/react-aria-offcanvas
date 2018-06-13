@@ -1,9 +1,31 @@
 import React from 'react';
-import { renderIntoDocument, cleanup, fireEvent } from 'react-testing-library';
+import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library';
 import OffCanvas from 'react-off-canvas';
 
 describe('OffCanvas', () => {
   afterEach(cleanup);
+
+  it('traps focus inside the OffCanvas content', () => {
+    const Buttons = () => (
+      <div>
+        <button>First</button>
+        <button>Second</button>
+      </div>
+    );
+
+    const { getByText, getByTestId } = renderIntoDocument(
+      <OffCanvas isOpen={true} trapFocusAfterOpen={true}>
+        <Buttons />
+      </OffCanvas>,
+    );
+
+    const first = getByText('First');
+    const second = getByText('Second');
+    fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
+    expect(document.activeElement).toBe(first);
+
+    cleanup();
+  });
 
   describe('closeOnOverlayClick', () => {
     describe('when false', () => {
