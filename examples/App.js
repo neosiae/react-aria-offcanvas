@@ -35,7 +35,7 @@ const styles = {
 
 export default class App extends Component {
   state = {
-    isOpen: true,
+    isOpen: false,
   };
 
   open = () => {
