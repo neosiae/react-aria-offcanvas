@@ -12,6 +12,8 @@ export default class OffCanvas extends Component {
     openFromRight: false,
     closeOnEsc: true,
     closeOnOverlayClick: true,
+    trapFocusAfterOpen: true,
+    returnFocusAfterClose: true,
     style: {
       overlay: {},
       content: {},
@@ -28,6 +30,8 @@ export default class OffCanvas extends Component {
     onClose: PropTypes.func,
     closeOnEsc: PropTypes.bool,
     closeOnOverlayClick: PropTypes.bool,
+    trapFocusAfterOpen: PropTypes.bool,
+    returnFocusAfterClose: PropTypes.bool,
     style: PropTypes.shape({
       overlay: PropTypes.object,
       content: PropTypes.object,
@@ -71,14 +75,25 @@ export default class OffCanvas extends Component {
   }
 
   open = () => {
-    focusManager.focusLater();
-    focusManager.trapFocus(this.content);
+    if (this.props.returnFocusAfterClose) {
+      focusManager.focusLater();
+    }
+
+    if (this.props.trapFocusAfterOpen) {
+      focusManager.trapFocus(this.content);
+    }
+
     this.focusContent();
   };
 
   close = () => {
-    focusManager.returnFocus();
-    focusManager.removeTrapFocus();
+    if (this.props.returnFocusAfterClose) {
+      focusManager.returnFocus();
+    }
+
+    if (this.props.trapFocusAfterOpen) {
+      focusManager.removeTrapFocus();
+    }
   };
 
   parentHandlesClose = event => {
