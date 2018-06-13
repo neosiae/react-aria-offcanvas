@@ -1,11 +1,28 @@
-import React from 'react';
-import { getContent } from '../src/helpers/tests';
+import React, { Component } from 'react';
 import OffCanvas from 'react-off-canvas';
+import { renderIntoDocument, cleanup, fireEvent } from 'react-testing-library';
+import { getContent } from './helpers/tests';
+import App from './helpers/components';
 
 describe('OffCanvas', () => {
   it('focuses the OffCanvas content when open', () => {
     const content = getContent(<OffCanvas isOpen={true} />);
     expect(document.activeElement).toBe(content);
+  });
+
+  it('returns focus to the last focused element', () => {
+    const { getByText, getByTestId } = renderIntoDocument(<App />);
+    const button = getByText('Open');
+
+    button.focus();
+    fireEvent.click(button);
+    button.blur();
+
+    expect(document.activeElement).toBe(getByTestId('content'));
+    fireEvent.click(getByTestId('overlay'));
+    expect(document.activeElement).toBe(button);
+
+    cleanup();
   });
 
   it('sets role based on the role prop', () => {
