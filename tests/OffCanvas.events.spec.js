@@ -52,6 +52,16 @@ describe('OffCanvas', () => {
   });
 
   describe('closeOnOverlayClick', () => {
+    it('should close on overlay click by default', () => {
+      const handleClose = jest.fn();
+      const { getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true} onClose={handleClose} />,
+      );
+
+      fireEvent.click(getByTestId('overlay'));
+      expect(handleClose).toHaveBeenCalled();
+    });
+
     it('should not close on overlay click if closeOnOverlayClick prop is false', () => {
       const handleClose = jest.fn();
       const { getByTestId } = renderIntoDocument(
@@ -64,16 +74,6 @@ describe('OffCanvas', () => {
 
       fireEvent.click(getByTestId('overlay'));
       expect(handleClose).not.toHaveBeenCalled();
-    });
-
-    it('should close on overlay click by default', () => {
-      const handleClose = jest.fn();
-      const { getByTestId } = renderIntoDocument(
-        <OffCanvas isOpen={true} onClose={handleClose} />,
-      );
-
-      fireEvent.click(getByTestId('overlay'));
-      expect(handleClose).toHaveBeenCalled();
     });
   });
 
