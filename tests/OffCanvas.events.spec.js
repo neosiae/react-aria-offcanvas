@@ -18,8 +18,6 @@ describe('OffCanvas', () => {
       expect(document.activeElement).toBe(getByTestId('content'));
       fireEvent.click(getByTestId('overlay'));
       expect(document.activeElement).toBe(button);
-
-      cleanup();
     });
 
     it('does not return focus to the last focused element if set to false', () => {
@@ -35,8 +33,6 @@ describe('OffCanvas', () => {
       expect(document.activeElement).toBe(getByTestId('content'));
       fireEvent.click(getByTestId('overlay'));
       expect(document.activeElement).not.toBe(button);
-
-      cleanup();
     });
   });
 
@@ -59,8 +55,6 @@ describe('OffCanvas', () => {
       const second = getByText('Second');
       fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
       expect(document.activeElement).toBe(first);
-
-      cleanup();
     });
 
     it('does not trap focus inside the OffCanvas content if set to false', () => {
@@ -81,8 +75,6 @@ describe('OffCanvas', () => {
       const second = getByText('Second');
       fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
       expect(document.activeElement).not.toBe(first);
-
-      cleanup();
     });
   });
 
