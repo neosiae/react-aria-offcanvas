@@ -5,85 +5,97 @@ import OffCanvas from 'react-off-canvas';
 describe('OffCanvas', () => {
   afterEach(cleanup);
 
-  it('traps focus inside the OffCanvas content', () => {
-    const Buttons = () => (
-      <div>
-        <button>First</button>
-        <button>Second</button>
-      </div>
-    );
+  describe('trapFocusAfterOpen', () => {
+    it('traps focus inside the OffCanvas content by default', () => {
+      const Buttons = () => (
+        <div>
+          <button>First</button>
+          <button>Second</button>
+        </div>
+      );
 
-    const { getByText, getByTestId } = renderIntoDocument(
-      <OffCanvas isOpen={true} trapFocusAfterOpen={true}>
-        <Buttons />
-      </OffCanvas>,
-    );
+      const { getByText, getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true}>
+          <Buttons />
+        </OffCanvas>,
+      );
 
-    const first = getByText('First');
-    const second = getByText('Second');
-    fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
-    expect(document.activeElement).toBe(first);
+      const first = getByText('First');
+      const second = getByText('Second');
+      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
+      expect(document.activeElement).toBe(first);
 
-    cleanup();
+      cleanup();
+    });
+
+    it('does not trap focus inside the OffCanvas content if trapFocusAfterOpen prop is false', () => {
+      const Buttons = () => (
+        <div>
+          <button>First</button>
+          <button>Second</button>
+        </div>
+      );
+
+      const { getByText, getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true} trapFocusAfterOpen={false}>
+          <Buttons />
+        </OffCanvas>,
+      );
+
+      const first = getByText('First');
+      const second = getByText('Second');
+      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
+      expect(document.activeElement).not.toBe(first);
+
+      cleanup();
+    });
   });
 
   describe('closeOnOverlayClick', () => {
-    describe('when false', () => {
-      it('should not close on overlay click', () => {
-        const handleClose = jest.fn();
-        const { getByTestId } = renderIntoDocument(
-          <OffCanvas
-            isOpen={true}
-            closeOnOverlayClick={false}
-            onClose={handleClose}
-          />,
-        );
+    it('should not close on overlay click if closeOnOverlayClick prop is false', () => {
+      const handleClose = jest.fn();
+      const { getByTestId } = renderIntoDocument(
+        <OffCanvas
+          isOpen={true}
+          closeOnOverlayClick={false}
+          onClose={handleClose}
+        />,
+      );
 
-        fireEvent.click(getByTestId('overlay'));
-        expect(handleClose).not.toHaveBeenCalled();
-      });
+      fireEvent.click(getByTestId('overlay'));
+      expect(handleClose).not.toHaveBeenCalled();
     });
 
-    describe('when true', () => {
-      it('should close on overlay click', () => {
-        const handleClose = jest.fn();
-        const { getByTestId } = renderIntoDocument(
-          <OffCanvas
-            isOpen={true}
-            closeOnOverlayClick={true}
-            onClose={handleClose}
-          />,
-        );
+    it('should close on overlay click by default', () => {
+      const handleClose = jest.fn();
+      const { getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true} onClose={handleClose} />,
+      );
 
-        fireEvent.click(getByTestId('overlay'));
-        expect(handleClose).toHaveBeenCalled();
-      });
+      fireEvent.click(getByTestId('overlay'));
+      expect(handleClose).toHaveBeenCalled();
     });
   });
 
   describe('closeOnEsc', () => {
-    describe('when false', () => {
-      it('should not close on ESC key', () => {
-        const handleClose = jest.fn();
-        const { getByTestId } = renderIntoDocument(
-          <OffCanvas isOpen={true} closeOnEsc={false} onClose={handleClose} />,
-        );
+    it('should close on ESC key by default', () => {
+      const handleClose = jest.fn();
+      const { getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true} onClose={handleClose} />,
+      );
 
-        fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
-        expect(handleClose).not.toHaveBeenCalled();
-      });
+      fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
+      expect(handleClose).toHaveBeenCalled();
     });
 
-    describe('when true', () => {
-      it('should close on ESC key', () => {
-        const handleClose = jest.fn();
-        const { getByTestId } = renderIntoDocument(
-          <OffCanvas isOpen={true} closeOnEsc={true} onClose={handleClose} />,
-        );
+    it('should not close on ESC key if closeOnEsc prop is false', () => {
+      const handleClose = jest.fn();
+      const { getByTestId } = renderIntoDocument(
+        <OffCanvas isOpen={true} closeOnEsc={false} onClose={handleClose} />,
+      );
 
-        fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
-        expect(handleClose).toHaveBeenCalled();
-      });
+      fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
+      expect(handleClose).not.toHaveBeenCalled();
     });
   });
 });
