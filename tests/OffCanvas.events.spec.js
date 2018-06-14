@@ -1,9 +1,44 @@
 import React from 'react';
 import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library';
 import OffCanvas from 'react-off-canvas';
+import App from './helpers/components';
 
 describe('OffCanvas', () => {
   afterEach(cleanup);
+
+  describe('returnFocusAfterClose', () => {
+    it('returns focus to the last focused element by default', () => {
+      const { getByText, getByTestId } = renderIntoDocument(<App />);
+      const button = getByText('Open');
+
+      button.focus();
+      fireEvent.click(button);
+      button.blur();
+
+      expect(document.activeElement).toBe(getByTestId('content'));
+      fireEvent.click(getByTestId('overlay'));
+      expect(document.activeElement).toBe(button);
+
+      cleanup();
+    });
+
+    it('does not return focus to the last focused element if set to false', () => {
+      const { getByText, getByTestId } = renderIntoDocument(
+        <App returnFocusAfterClose={false} />,
+      );
+      const button = getByText('Open');
+
+      button.focus();
+      fireEvent.click(button);
+      button.blur();
+
+      expect(document.activeElement).toBe(getByTestId('content'));
+      fireEvent.click(getByTestId('overlay'));
+      expect(document.activeElement).not.toBe(button);
+
+      cleanup();
+    });
+  });
 
   describe('trapFocusAfterOpen', () => {
     it('traps focus inside the OffCanvas content by default', () => {
@@ -28,7 +63,7 @@ describe('OffCanvas', () => {
       cleanup();
     });
 
-    it('does not trap focus inside the OffCanvas content if trapFocusAfterOpen prop is false', () => {
+    it('does not trap focus inside the OffCanvas content if set to false', () => {
       const Buttons = () => (
         <div>
           <button>First</button>
@@ -62,7 +97,7 @@ describe('OffCanvas', () => {
       expect(handleClose).toHaveBeenCalled();
     });
 
-    it('should not close on overlay click if closeOnOverlayClick prop is false', () => {
+    it('should not close on overlay click if set to false', () => {
       const handleClose = jest.fn();
       const { getByTestId } = renderIntoDocument(
         <OffCanvas
@@ -88,7 +123,7 @@ describe('OffCanvas', () => {
       expect(handleClose).toHaveBeenCalled();
     });
 
-    it('should not close on ESC key if closeOnEsc prop is false', () => {
+    it('should not close on ESC key if set to false', () => {
       const handleClose = jest.fn();
       const { getByTestId } = renderIntoDocument(
         <OffCanvas isOpen={true} closeOnEsc={false} onClose={handleClose} />,

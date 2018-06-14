@@ -1,8 +1,6 @@
 import React from 'react';
-import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library';
 import OffCanvas from 'react-off-canvas';
 import { getOverlay, getContent, extractNumber } from './helpers/tests';
-import App from './helpers/components';
 
 describe('OffCanvas', () => {
   it('focuses the OffCanvas content when open', () => {
@@ -10,31 +8,18 @@ describe('OffCanvas', () => {
     expect(document.activeElement).toBe(content);
   });
 
-  it('returns focus to the last focused element', () => {
-    const { getByText, getByTestId } = renderIntoDocument(<App />);
-    const button = getByText('Open');
+  describe('openFromRight', () => {
+    it('opens from the left side by default', () => {
+      const content = getContent(<OffCanvas />);
+      const value = extractNumber(content.style.transform);
+      expect(value).toBeLessThan(0);
+    });
 
-    button.focus();
-    fireEvent.click(button);
-    button.blur();
-
-    expect(document.activeElement).toBe(getByTestId('content'));
-    fireEvent.click(getByTestId('overlay'));
-    expect(document.activeElement).toBe(button);
-
-    cleanup();
-  });
-
-  it('opens from the left side by default', () => {
-    const content = getContent(<OffCanvas />);
-    const value = extractNumber(content.style.transform);
-    expect(value).toBeLessThan(0);
-  });
-
-  it('opens from the right side', () => {
-    const content = getContent(<OffCanvas openFromRight={true} />);
-    const value = extractNumber(content.style.transform);
-    expect(value).toBeGreaterThan(0);
+    it('opens from the right side if set to true', () => {
+      const content = getContent(<OffCanvas openFromRight={true} />);
+      const value = extractNumber(content.style.transform);
+      expect(value).toBeGreaterThan(0);
+    });
   });
 
   it('accepts a custom role', () => {

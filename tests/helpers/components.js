@@ -18,7 +18,11 @@ export default class App extends Component {
     return (
       <Fragment>
         <button onClick={this.open}>Open</button>
-        <OffCanvas isOpen={this.state.isOpen} onClose={this.close}>
+        <OffCanvas
+          isOpen={this.state.isOpen}
+          returnFocusAfterClose={this.props.returnFocusAfterClose}
+          onClose={this.close}
+        >
           <h1>Testing...</h1>
         </OffCanvas>
       </Fragment>
