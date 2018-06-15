@@ -13,15 +13,15 @@ describe('OffCanvas', () => {
     expect(content.style.width).toBe('50%');
   });
 
-  describe('openFromRight', () => {
+  describe('position', () => {
     it('opens from the left side by default', () => {
       const content = getContent(<OffCanvas />);
       const value = extractNumber(content.style.transform);
       expect(value).toBeLessThan(0);
     });
 
-    it('opens from the right side if set to true', () => {
-      const content = getContent(<OffCanvas openFromRight={true} />);
+    it('opens from the right side if set to right', () => {
+      const content = getContent(<OffCanvas position="right" />);
       const value = extractNumber(content.style.transform);
       expect(value).toBeGreaterThan(0);
     });

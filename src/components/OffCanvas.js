@@ -9,7 +9,7 @@ export default class OffCanvas extends Component {
   static defaultProps = {
     isOpen: false,
     width: '300px',
-    openFromRight: false,
+    position: 'left',
     closeOnEsc: true,
     closeOnOverlayClick: true,
     trapFocusAfterOpen: true,
@@ -23,7 +23,7 @@ export default class OffCanvas extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     width: PropTypes.string,
-    openFromRight: PropTypes.bool,
+    position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
     role: PropTypes.string,
     label: PropTypes.string,
     labelledby: PropTypes.string,
@@ -125,13 +125,13 @@ export default class OffCanvas extends Component {
   focusContent = () => this.content && this.content.focus();
 
   getStyles = () => {
-    const { isOpen, width, openFromRight, style } = this.props;
+    const { isOpen, width, position, style } = this.props;
 
     const styles = createStyles(
       OffCanvas.defaultStyles,
       isOpen,
       width,
-      openFromRight,
+      position,
       style,
     );
 

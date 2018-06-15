@@ -56,7 +56,7 @@ export default class App extends Component {
           </p>
           <button
             id="menu-button"
-            aria-label="menu"
+            aria-label="Menu"
             aria-controls="menu"
             aria-expanded={this.state.isOpen}
             onClick={this.open}
@@ -65,8 +65,8 @@ export default class App extends Component {
           </button>
         </div>
         <OffCanvas
-          onClose={this.close}
           isOpen={this.state.isOpen}
+          onClose={this.close}
           labelledby="menu-button"
         >
           <button onClick={this.close}>Close</button>

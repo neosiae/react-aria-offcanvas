@@ -1,4 +1,12 @@
-const createStyles = (defaultStyles, isOpen, width, right, customStyles) => {
+const getPosition = (position, width) => {
+  if (position === 'left') {
+    return `translateX(-${width})`;
+  } else if (position === 'right') {
+    return `translateX(${width})`;
+  }
+};
+
+const createStyles = (defaultStyles, isOpen, width, position, customStyles) => {
   return {
     overlay: {
       ...defaultStyles.overlay,
@@ -8,33 +16,13 @@ const createStyles = (defaultStyles, isOpen, width, right, customStyles) => {
     content: {
       ...defaultStyles.content,
       width: width,
-      left: right ? 'auto' : '0',
-      right: right ? '0' : 'auto',
-      MozTransform: isOpen
-        ? ''
-        : right
-          ? `translateX(${width})`
-          : `translateX(-${width})`,
-      MsTransform: isOpen
-        ? ''
-        : right
-          ? `translateX(${width})`
-          : `translateX(-${width})`,
-      OTransform: isOpen
-        ? ''
-        : right
-          ? `translateX(${width})`
-          : `translateX(-${width})`,
-      WebkitTransform: isOpen
-        ? ''
-        : right
-          ? `translateX(${width})`
-          : `translateX(-${width})`,
-      transform: isOpen
-        ? ''
-        : right
-          ? `translateX(${width})`
-          : `translateX(-${width})`,
+      left: position === 'left' ? '0' : 'auto',
+      right: position === 'right' ? '0' : 'auto',
+      MozTransform: isOpen ? '' : getPosition(position, width),
+      MsTransform: isOpen ? '' : getPosition(position, width),
+      OTransform: isOpen ? '' : getPosition(position, width),
+      WebkitTransform: isOpen ? '' : getPosition(position, width),
+      transform: isOpen ? '' : getPosition(position, width),
       transition: 'all 0.2s',
       ...customStyles.content,
       // !important
