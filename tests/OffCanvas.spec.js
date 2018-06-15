@@ -8,6 +8,11 @@ describe('OffCanvas', () => {
     expect(document.activeElement).toBe(content);
   });
 
+  it('accepts a custom width', () => {
+    const content = getContent(<OffCanvas width={'50%'} />);
+    expect(content.style.width).toBe('50%');
+  });
+
   describe('openFromRight', () => {
     it('opens from the left side by default', () => {
       const content = getContent(<OffCanvas />);
