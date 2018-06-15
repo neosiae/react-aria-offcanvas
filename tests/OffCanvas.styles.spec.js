@@ -41,5 +41,17 @@ describe('OffCanvas', () => {
       expect(content.style.visibility).toBe('visible');
       expect(content.style.transitionProperty).toBe('transform');
     });
+
+    it('visibility can not be overwritten', () => {
+      const style = { content: { visibility: 'visible' } };
+      const content = getContent(<OffCanvas style={style} />);
+      expect(content.style.visibility).toBe('hidden');
+    });
+
+    it('transitionProperty can not be overwritten', () => {
+      const style = { content: { transitionProperty: 'all' } };
+      const content = getContent(<OffCanvas style={style} />);
+      expect(content.style.transitionProperty).toBeUndefined;
+    });
   });
 });
