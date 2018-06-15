@@ -1,6 +1,6 @@
 import React from 'react';
 import OffCanvas from 'react-off-canvas';
-import { getOverlay, getContent, extractNumber } from './helpers/tests';
+import { getContent, extractNumber } from './helpers/tests';
 
 describe('OffCanvas', () => {
   it('focuses the OffCanvas content when open', () => {
@@ -45,17 +45,5 @@ describe('OffCanvas', () => {
   it('sets aria-hidden to true when closed', () => {
     const content = getContent(<OffCanvas />);
     expect(content.getAttribute('aria-hidden')).toBe('true');
-  });
-
-  it('accepts a custom className', () => {
-    const content = getContent(<OffCanvas className="customClassName" />);
-    expect(content.classList.contains('customClassName')).toBe(true);
-  });
-
-  it('accepts a custom overlayClassName', () => {
-    const overlay = getOverlay(
-      <OffCanvas overlayClassName="customOverlayClassName" />,
-    );
-    expect(overlay.classList.contains('customOverlayClassName')).toBe(true);
   });
 });
