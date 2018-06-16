@@ -3,11 +3,18 @@
     "browser": true,
     "jest": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier",
+    "plugin:jsx-a11y/recommended"
+  ],
   "parser": "babel-eslint",
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "error",
-    "no-unused-vars": ["error", { "args": "none" }]
+    "no-unused-vars": ["error", { "args": "none" }],
+    "jsx-a11y/no-static-element-interactions": [0],
+    "jsx-a11y/click-events-have-key-events": [0]
   }
 }
