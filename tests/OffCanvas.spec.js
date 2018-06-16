@@ -14,14 +14,26 @@ describe('OffCanvas', () => {
   });
 
   describe('position', () => {
-    it('opens from the left side by default', () => {
+    it('opens from the left by default', () => {
       const content = getContent(<OffCanvas />);
       const value = extractNumber(content.style.transform);
       expect(value).toBeLessThan(0);
     });
 
-    it('opens from the right side if set to right', () => {
+    it('opens from the right if set to right', () => {
       const content = getContent(<OffCanvas position="right" />);
+      const value = extractNumber(content.style.transform);
+      expect(value).toBeGreaterThan(0);
+    });
+
+    it('opens from the top if set to top', () => {
+      const content = getContent(<OffCanvas position="top" />);
+      const value = extractNumber(content.style.transform);
+      expect(value).toBeLessThan(0);
+    });
+
+    it('opens from the bottom if set to bottom', () => {
+      const content = getContent(<OffCanvas position="bottom" />);
       const value = extractNumber(content.style.transform);
       expect(value).toBeGreaterThan(0);
     });

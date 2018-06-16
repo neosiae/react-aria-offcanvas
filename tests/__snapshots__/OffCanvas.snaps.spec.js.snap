@@ -8,7 +8,7 @@ exports[`OffCanvas renders correctly when closed 1`] = `
   style={
     Object {
       "background": "rgba(255, 255, 255, 0.5)",
-      "height": "100vh",
+      "height": "100%",
       "left": 0,
       "position": "fixed",
       "top": 0,
@@ -27,17 +27,19 @@ exports[`OffCanvas renders correctly when closed 1`] = `
     role={undefined}
     style={
       Object {
-        "MozTransform": "translateX(-300px)",
-        "MsTransform": "translateX(-300px)",
-        "OTransform": "translateX(-300px)",
-        "WebkitTransform": "translateX(-300px)",
+        "MozTransform": "translateX(-100%)",
+        "MsTransform": "translateX(-100%)",
+        "OTransform": "translateX(-100%)",
+        "WebkitTransform": "translateX(-100%)",
         "background": "rgba(0, 0, 0, 0.1)",
-        "height": "100vh",
+        "bottom": "auto",
+        "height": "300px",
         "left": "0",
         "outline": 0,
         "position": "fixed",
         "right": "auto",
-        "transform": "translateX(-300px)",
+        "top": "auto",
+        "transform": "translateX(-100%)",
         "transition": "all 0.2s",
         "transitionProperty": "",
         "visibility": "hidden",
@@ -58,11 +60,11 @@ exports[`OffCanvas renders correctly when open 1`] = `
   style={
     Object {
       "background": "rgba(255, 255, 255, 0.5)",
-      "height": "100vh",
+      "height": "100%",
       "left": 0,
       "position": "fixed",
       "top": 0,
-      "width": "100vw",
+      "width": "100%",
       "zIndex": "900",
     }
   }
@@ -82,11 +84,13 @@ exports[`OffCanvas renders correctly when open 1`] = `
         "OTransform": "",
         "WebkitTransform": "",
         "background": "rgba(0, 0, 0, 0.1)",
-        "height": "100vh",
+        "bottom": "auto",
+        "height": "300px",
         "left": "0",
         "outline": 0,
         "position": "fixed",
         "right": "auto",
+        "top": "auto",
         "transform": "",
         "transition": "all 0.2s",
         "transitionProperty": "transform",
