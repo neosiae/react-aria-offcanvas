@@ -1,4 +1,10 @@
-const getPosition = position => {
+const setPosition = position => {
+  let obj = {};
+  obj[position] = '0';
+  return obj;
+};
+
+const setTransformValue = position => {
   if (position === 'left') {
     return `translateX(-100%)`;
   } else if (position === 'right') {
@@ -18,6 +24,9 @@ const createStyles = (
   position,
   customStyles,
 ) => {
+  // Get the vertical or horizontal position of an element so we can use it in
+  // inline styles.
+  const setPositionValue = setPosition(position);
   return {
     overlay: {
       ...defaultStyles.overlay,
@@ -28,15 +37,12 @@ const createStyles = (
       ...defaultStyles.content,
       width: width,
       height: height,
-      left: position === 'left' ? '0' : 'auto',
-      right: position === 'right' ? '0' : 'auto',
-      top: position === 'top' ? '0' : 'auto',
-      bottom: position === 'bottom' ? '0' : 'auto',
-      MozTransform: isOpen ? '' : getPosition(position),
-      MsTransform: isOpen ? '' : getPosition(position),
-      OTransform: isOpen ? '' : getPosition(position),
-      WebkitTransform: isOpen ? '' : getPosition(position),
-      transform: isOpen ? '' : getPosition(position),
+      ...setPositionValue,
+      MozTransform: isOpen ? '' : setTransformValue(position),
+      MsTransform: isOpen ? '' : setTransformValue(position),
+      OTransform: isOpen ? '' : setTransformValue(position),
+      WebkitTransform: isOpen ? '' : setTransformValue(position),
+      transform: isOpen ? '' : setTransformValue(position),
       transition: 'all 0.2s',
       ...customStyles.content,
       // !important
