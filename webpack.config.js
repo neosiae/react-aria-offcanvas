@@ -31,4 +31,7 @@ module.exports = {
       'react-off-canvas': path.resolve(__dirname, 'src/index'),
     },
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'examples'),
+  },
 };

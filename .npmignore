@@ -1,0 +1,8 @@
+src
+tests
+examples
+.babelrc
+.eslintrc.json
+.gitignore
+prettier.config.js
+webpack.config.js
