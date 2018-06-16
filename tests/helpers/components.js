@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import OffCanvas from 'react-off-canvas';
 
+/* eslint react/prop-types: 0 */
 export default class App extends Component {
   state = {
     isOpen: false,

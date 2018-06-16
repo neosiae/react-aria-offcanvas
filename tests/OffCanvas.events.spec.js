@@ -45,7 +45,7 @@ describe('OffCanvas', () => {
         </div>
       );
 
-      const { getByText, getByTestId } = renderIntoDocument(
+      const { getByText } = renderIntoDocument(
         <OffCanvas isOpen={true}>
           <Buttons />
         </OffCanvas>,
@@ -65,7 +65,7 @@ describe('OffCanvas', () => {
         </div>
       );
 
-      const { getByText, getByTestId } = renderIntoDocument(
+      const { getByText } = renderIntoDocument(
         <OffCanvas isOpen={true} trapFocusAfterOpen={false}>
           <Buttons />
         </OffCanvas>,
