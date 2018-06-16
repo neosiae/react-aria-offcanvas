@@ -26,7 +26,7 @@ const createStyles = (
 ) => {
   // Get the vertical or horizontal position of an element so we can use it in
   // inline styles.
-  const setPositionValue = setPosition(position);
+  const positionProperty = setPosition(position);
   return {
     overlay: {
       ...defaultStyles.overlay,
@@ -37,7 +37,7 @@ const createStyles = (
       ...defaultStyles.content,
       width: width,
       height: height,
-      ...setPositionValue,
+      ...positionProperty,
       MozTransform: isOpen ? '' : setTransformValue(position),
       MsTransform: isOpen ? '' : setTransformValue(position),
       OTransform: isOpen ? '' : setTransformValue(position),
