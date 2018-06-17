@@ -12,3 +12,12 @@ export const findTabbable = element => {
   const tabbableElements = element.querySelectorAll(tabbable.join(','));
   return tabbableElements;
 };
+
+export const setTabbable = element => {
+  const tabbable = findTabbable(element);
+
+  return {
+    first: tabbable[0],
+    last: tabbable[tabbable.length - 1],
+  };
+};

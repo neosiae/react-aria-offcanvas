@@ -81,7 +81,7 @@ export default class OffCanvas extends Component {
     }
 
     if (this.props.trapFocusAfterOpen) {
-      focusManager.trapFocus(this.content);
+      focusManager.setFocusTrap(this.content);
     }
 
     this.focusContent();
@@ -93,7 +93,7 @@ export default class OffCanvas extends Component {
     }
 
     if (this.props.trapFocusAfterOpen) {
-      focusManager.removeTrapFocus();
+      focusManager.removeFocusTrap();
     }
   };
 

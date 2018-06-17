@@ -1,33 +1,9 @@
-import { findTabbable } from './tabbable';
+import { setTabbable } from './tabbable';
 
 const TAB_KEY = 9;
 
 let lastFocusedElement = undefined;
-let offCanvasElement = undefined;
-
-const handleTrapFocus = (event, firstTabbable, lastTabbable) => {
-  if (event.shiftKey) {
-    if (event.target === firstTabbable) {
-      event.preventDefault();
-      lastTabbable.focus();
-    }
-  } else {
-    if (event.target === lastTabbable) {
-      event.preventDefault();
-      firstTabbable.focus();
-    }
-  }
-};
-
-const handleKeyDown = event => {
-  const tabbable = Array.from(findTabbable(offCanvasElement));
-  const firstTabbable = tabbable[0];
-  const lastTabbable = tabbable[tabbable.length - 1];
-
-  if (event.keyCode === TAB_KEY) {
-    handleTrapFocus(event, firstTabbable, lastTabbable);
-  }
-};
+let tabbable = undefined;
 
 export const focusLater = () => {
   lastFocusedElement = document.activeElement;
@@ -40,12 +16,33 @@ export const returnFocus = () => {
   }
 };
 
-export const trapFocus = element => {
-  offCanvasElement = element;
-  document.addEventListener('keydown', handleKeyDown, true);
+export const setFocusTrap = element => {
+  tabbable = setTabbable(element);
+  document.addEventListener('keydown', focusTrap, true);
 };
 
-export const removeTrapFocus = () => {
-  offCanvasElement = null;
-  document.removeEventListener('keydown', handleKeyDown, true);
+export const removeFocusTrap = () => {
+  document.removeEventListener('keydown', focusTrap, true);
+  tabbable = null;
+};
+
+const isTabKey = event => event.keyCode === TAB_KEY;
+
+// Don't let the focus to leave tabbable elements
+const focusTrap = event => {
+  if (!isTabKey(event)) return;
+
+  if (event.shiftKey) {
+    // If focus is on the first element, move focus to the last element
+    if (event.target === tabbable.first) {
+      event.preventDefault();
+      tabbable.last.focus();
+    }
+  } else {
+    // If focus is on the last element, move focus to the first element
+    if (event.target === tabbable.last) {
+      event.preventDefault();
+      tabbable.first.focus();
+    }
+  }
 };
