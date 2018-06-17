@@ -8,16 +8,20 @@ const tabbable = [
   '[tabindex]',
 ];
 
-export const findTabbable = element => {
-  const tabbableElements = element.querySelectorAll(tabbable.join(','));
-  return tabbableElements;
+const findTabbable = element => {
+  if (element) {
+    const tabbableElements = element.querySelectorAll(tabbable.join(','));
+    return tabbableElements;
+  }
 };
 
 export const setTabbable = element => {
-  const tabbable = findTabbable(element);
+  if (element) {
+    const tabbableElements = findTabbable(element);
 
-  return {
-    first: tabbable[0],
-    last: tabbable[tabbable.length - 1],
-  };
+    return {
+      first: tabbableElements[0],
+      last: tabbableElements[tabbableElements.length - 1],
+    };
+  }
 };

@@ -4,7 +4,7 @@ import OffCanvas from 'react-off-canvas';
 
 describe('OffCanvas', () => {
   it('renders correctly when open', () => {
-    const tree = renderer.create(<OffCanvas isOpen />).toJSON();
+    const tree = renderer.create(<OffCanvas isOpen={true} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
