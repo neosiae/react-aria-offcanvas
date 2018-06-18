@@ -1,6 +1,6 @@
 {
   "name": "react-aria-offcanvas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Accessible Off-Canvas component for React.js",
   "main": "dist/index.js",
   "scripts": {

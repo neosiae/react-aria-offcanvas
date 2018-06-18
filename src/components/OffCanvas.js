@@ -50,14 +50,22 @@ export default class OffCanvas extends Component {
       left: 0,
       width: '100%',
       height: '100%',
-      background: 'rgba(255, 255, 255, 0.5)',
       zIndex: '900',
     },
     content: {
       position: 'fixed',
-      background: 'rgba(0, 0, 0, 0.1)',
       zIndex: '1000',
       outline: 0,
+    },
+  };
+
+  static extraStyles = {
+    overlay: {
+      background: 'rgba(255, 255, 255, 0.5)',
+    },
+    content: {
+      background: 'rgba(0, 0, 0, 0.1)',
+      transition: 'all 0.2s',
     },
   };
 
@@ -125,11 +133,26 @@ export default class OffCanvas extends Component {
 
   focusContent = () => this.content && this.content.focus();
 
+  getExtraStyles = () => {
+    const { className, overlayClassName } = this.props;
+
+    // Remove extra styles when classNames are passed
+    const overlayStyles = overlayClassName ? {} : OffCanvas.extraStyles.overlay;
+    const contentStyles = className ? {} : OffCanvas.extraStyles.content;
+
+    return {
+      overlay: overlayStyles,
+      content: contentStyles,
+    };
+  };
+
   getStyles = () => {
     const { isOpen, width, height, position, style } = this.props;
+    const extraStyles = this.getExtraStyles();
 
     const styles = createStyles(
       OffCanvas.defaultStyles,
+      extraStyles,
       isOpen,
       width,
       height,

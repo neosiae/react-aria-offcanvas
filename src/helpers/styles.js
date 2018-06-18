@@ -18,6 +18,7 @@ const setTransformValue = position => {
 
 const createStyles = (
   defaultStyles,
+  extraStyles,
   isOpen,
   width,
   height,
@@ -31,10 +32,12 @@ const createStyles = (
     overlay: {
       ...defaultStyles.overlay,
       width: isOpen ? '100%' : '',
+      ...extraStyles.overlay,
       ...customStyles.overlay,
     },
     content: {
       ...defaultStyles.content,
+      ...extraStyles.content,
       width: width,
       height: height,
       ...positionProperty,
@@ -43,7 +46,6 @@ const createStyles = (
       OTransform: isOpen ? '' : setTransformValue(position),
       WebkitTransform: isOpen ? '' : setTransformValue(position),
       transform: isOpen ? '' : setTransformValue(position),
-      transition: 'all 0.2s',
       ...customStyles.content,
       // !important
       visibility: isOpen ? 'visible' : 'hidden',

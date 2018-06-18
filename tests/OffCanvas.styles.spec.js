@@ -16,6 +16,13 @@ describe('OffCanvas', () => {
       );
       expect(overlay.classList.contains('customOverlayClassName')).toBe(true);
     });
+
+    it('removes extra styles when a custom overlayClassName is passed', () => {
+      const overlay = getOverlay(
+        <OffCanvas overlayClassName="customOverlayClassName" />,
+      );
+      expect(overlay.style.background).toBe('');
+    });
   });
 
   describe('content', () => {
@@ -28,6 +35,11 @@ describe('OffCanvas', () => {
     it('accepts a custom className', () => {
       const content = getContent(<OffCanvas className="customClassName" />);
       expect(content.classList.contains('customClassName')).toBe(true);
+    });
+
+    it('removes extra styles when a custom className is passed', () => {
+      const content = getContent(<OffCanvas className="customClassName" />);
+      expect(content.style.background).toBe('');
     });
 
     it('has important styles when closed', () => {
