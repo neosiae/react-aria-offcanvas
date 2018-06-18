@@ -3,6 +3,8 @@
 
 Accessible Off-Canvas component for React.js
 
+## Demo
+
 ## Installation
 
 Install `react-off-canvas` using npm:
