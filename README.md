@@ -86,7 +86,7 @@ The only required property for the component is `isOpen`, which controls whether
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `isOpen` | `bool` | `false` | Controls whether `OffCanvas` is displayed or not. |
+| `isOpen` | `bool` | `false` | Display `OffCanvas`. |
 | `width` | `string` | `300px` | The width of `OffCanvas`. | 
 | `height` | `string` | `300px` | The height of `OffCanvas`. |
 | `position` | `string` | `left` | Position `OffCanvas` to the `left`, `right`, `top` or `bottom`. |
@@ -95,7 +95,7 @@ The only required property for the component is `isOpen`, which controls whether
 | `closeOnOverlayClick` | `bool` | `true` | Close `OffCanvas` on overlay click. | 
 | `trapFocusAfterOpen` | `bool` | `true` | Trap focus when `OffCanvas` is open. |
 | `returnFocusAfterClose` | `bool` | `true` | Return focus to the element that had focus before opening `OffCanvas`. |
-| `style` | `object` | `{ overlay: {}, content: {} } }` | Inline styles object. It has two keys: `overlay object` - overlay styles and `content object` - `OffCanvas` styles |
+| `style` | `object` | `{ overlay: {}, content: {} } }` | Inline styles object. It has two keys: `overlay` - overlay styles and `content` - `OffCanvas` styles |
 | `className` | `string` | | Custom className for `OffCanvas` |
 | `overlayClassName` | `string` | | Custom className for the overlay | 
 | `role` | `string` | | Custom role for `OffCanvas` |
