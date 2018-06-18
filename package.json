@@ -22,7 +22,8 @@
   "keywords": [
     "react",
     "react-component",
-    "off-canvas"
+    "aria",
+    "offcanvas"
   ],
   "author": "Denis Kotlica",
   "license": "MIT",
