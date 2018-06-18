@@ -65,7 +65,7 @@ export default class OffCanvas extends Component {
     },
     content: {
       background: 'rgba(0, 0, 0, 0.1)',
-      transition: 'all 0.2s',
+      transition: '0.4s ease-out',
     },
   };
 

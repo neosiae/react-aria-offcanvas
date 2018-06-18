@@ -90,7 +90,7 @@ The only required property for the component is `isOpen`, which controls whether
 
 | Prop | Type | Default | Description |
 | ---- | ---- | ------- | ----------- |
-| `isOpen` | `bool` | `false` | Display OffCanvas. |
+| `isOpen` | `bool` | `false` | Open or close OffCanvas |
 | `width` | `string` | `300px` | The width of OffCanvas | 
 | `height` | `string` | `300px` | The height of OffCanvas |
 | `position` | `string` | `left` | Position OffCanvas to the `left`, `right`, `top` or `bottom` |
