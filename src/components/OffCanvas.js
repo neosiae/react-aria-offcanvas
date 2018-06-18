@@ -26,9 +26,6 @@ export default class OffCanvas extends Component {
     width: PropTypes.string,
     height: PropTypes.string,
     position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
-    role: PropTypes.string,
-    label: PropTypes.string,
-    labelledby: PropTypes.string,
     onClose: PropTypes.func,
     closeOnEsc: PropTypes.bool,
     closeOnOverlayClick: PropTypes.bool,
@@ -40,6 +37,9 @@ export default class OffCanvas extends Component {
     }),
     className: PropTypes.string,
     overlayClassName: PropTypes.string,
+    role: PropTypes.string,
+    label: PropTypes.string,
+    labelledby: PropTypes.string,
     children: PropTypes.node,
   };
 

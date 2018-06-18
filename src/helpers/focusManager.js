@@ -28,7 +28,7 @@ export const removeFocusTrap = () => {
 
 const isTabKey = event => event.keyCode === TAB_KEY;
 
-// Don't let the focus to leave tabbable elements
+// Don't let focus to leave tabbable elements
 const focusTrap = event => {
   if (!isTabKey(event)) return;
 
