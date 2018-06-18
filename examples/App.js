@@ -31,6 +31,9 @@ const styles = {
   subtitle: {
     fontSize: '1.5rem',
   },
+  github: {
+    marginTop: '2.5rem',
+  },
 };
 
 export default class App extends Component {
@@ -63,6 +66,14 @@ export default class App extends Component {
           >
             Click here
           </button>
+          <p style={styles.github}>
+            <a
+              target="_blank"
+              href="https://github.com/neosiae/react-aria-offcanvas"
+            >
+              View source on Github
+            </a>
+          </p>
         </div>
         <OffCanvas
           isOpen={this.state.isOpen}
