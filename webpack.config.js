@@ -28,7 +28,7 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'react-off-canvas': path.resolve(__dirname, 'src/index'),
+      'react-aria-offcanvas': path.resolve(__dirname, 'src/index'),
     },
   },
   devServer: {

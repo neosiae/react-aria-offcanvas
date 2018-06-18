@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 
 describe('OffCanvas', () => {
   it('renders correctly when open', () => {

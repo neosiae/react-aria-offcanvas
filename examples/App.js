@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 
 const Navigation = () => (
   <nav id="menu">
@@ -50,7 +50,7 @@ export default class App extends Component {
     return (
       <Fragment>
         <div style={styles.container}>
-          <h1>react-off-canvas</h1>
+          <h1>react-aria-offcanvas</h1>
           <p style={styles.subtitle}>
             Accessible Off-Canvas component for React.js
           </p>

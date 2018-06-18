@@ -1,25 +1,27 @@
-# react-off-canvas 
-[![Build Status](https://travis-ci.com/neosiae/react-off-canvas.svg?branch=master)](https://travis-ci.com/neosiae/react-off-canvas) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+# react-aria-offcanvas
+[![Build Status](https://travis-ci.com/neosiae/react-aria-offcanvas.svg?branch=master)](https://travis-ci.com/neosiae/react-aria-offcanvas) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Accessible Off-Canvas component for React.js
 
 ## Demo
 
+https://neosiae.github.io/react-aria-offcanvas
+
 ## Installation
 
-Install `react-off-canvas` using npm:
+Install `react-aria-offcanvas` using npm:
 
-> npm install --save react-off-canvas
+> npm install --save react-aria-offcanvas
 
 Or via yarn:
 
-> yarn add react-off-canvas
+> yarn add react-aria-offcanvas
 
 ## Usage
 
 ```javascript
 import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 
 const Navigation = () => (
   <nav id="menu">

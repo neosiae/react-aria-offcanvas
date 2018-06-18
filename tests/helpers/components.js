@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 
 /* eslint react/prop-types: 0 */
 export default class App extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 import App from './helpers/components';
 
 describe('OffCanvas', () => {

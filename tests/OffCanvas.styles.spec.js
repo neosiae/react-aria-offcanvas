@@ -1,6 +1,6 @@
 import React from 'react';
 import { getOverlay, getContent } from './helpers/tests';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 
 describe('OffCanvas', () => {
   describe('overlay', () => {

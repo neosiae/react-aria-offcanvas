@@ -1,5 +1,5 @@
 {
-  "name": "react-off-canvas",
+  "name": "react-aria-offcanvas",
   "version": "1.0.0",
   "description": "Accessible Off-Canvas component for React.js",
   "main": "dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/neosiae/react-off-canvas-menu.git"
+    "url": "git+https://github.com/neosiae/react-aria-offcanvas.git"
   },
   "keywords": [
     "react",
@@ -27,9 +27,9 @@
   "author": "Denis Kotlica",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/neosiae/react-off-canvas-menu/issues"
+    "url": "https://github.com/neosiae/react-aria-offcanvas/issues"
   },
-  "homepage": "https://github.com/neosiae/react-off-canvas-menu#readme",
+  "homepage": "https://neosiae.github.io/react-aria-offcanvas",
   "dependencies": {
     "prop-types": "^15.6.1"
   },

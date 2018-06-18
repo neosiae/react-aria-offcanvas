@@ -1,5 +1,5 @@
 import React from 'react';
-import OffCanvas from 'react-off-canvas';
+import OffCanvas from 'react-aria-offcanvas';
 import { getContent, extractNumber } from './helpers/tests';
 
 describe('OffCanvas', () => {
