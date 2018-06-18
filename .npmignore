@@ -4,5 +4,6 @@ examples
 .babelrc
 .eslintrc.json
 .gitignore
+.travis.yml
 prettier.config.js
 webpack.config.js
