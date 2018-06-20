@@ -10,7 +10,7 @@
     "publish:gh": "npm run build && npm run deploy",
     "transpile": "npx babel src -d dist",
     "prepublish": "npm run transpile",
-    "lint": "npx eslint src tests",
+    "lint": "eslint src tests",
     "jest": "npx jest",
     "jest:w": "npx jest --watch",
     "test": "npm run lint && npm run jest"

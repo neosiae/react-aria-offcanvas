@@ -1,8 +1,11 @@
 import React from 'react';
+import { cleanup } from 'react-testing-library';
 import { getOverlay, getContent } from './helpers/tests';
 import OffCanvas from 'react-aria-offcanvas';
 
 describe('OffCanvas', () => {
+  afterEach(cleanup);
+
   describe('overlay', () => {
     it('supports inline styling', () => {
       const style = { overlay: { background: 'rgba(0, 0, 0, 0.5)' } };

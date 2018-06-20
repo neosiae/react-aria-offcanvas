@@ -1,11 +1,50 @@
 import React from 'react';
 import OffCanvas from 'react-aria-offcanvas';
+import { render, renderIntoDocument, cleanup } from 'react-testing-library';
 import { getContent, extractNumber } from './helpers/tests';
 
 describe('OffCanvas', () => {
+  afterEach(cleanup);
+
   it('focuses the OffCanvas content when open', () => {
     const content = getContent(<OffCanvas isOpen={true} />);
     expect(document.activeElement).toBe(content);
+  });
+
+  it('focuses the first child when open if focusFirstChildAfterOpen is true', () => {
+    const Buttons = () => (
+      <div>
+        <button>First</button>
+        <button>Second</button>
+      </div>
+    );
+
+    const { getByText } = render(
+      <OffCanvas isOpen={true} focusFirstChildAfterOpen={true}>
+        <Buttons />
+      </OffCanvas>,
+    );
+
+    const first = getByText('First');
+    expect(document.activeElement).toBe(first);
+  });
+
+  it('focuses a specific child when open if focusThisChildAfterOpen is defined', () => {
+    const Buttons = () => (
+      <div>
+        <button>First</button>
+        <button id="second">Second</button>
+      </div>
+    );
+
+    const { getByText } = renderIntoDocument(
+      <OffCanvas isOpen={true} focusThisChildAfterOpen="#second">
+        <Buttons />
+      </OffCanvas>,
+    );
+
+    const second = getByText('Second');
+    expect(document.activeElement).toBe(second);
   });
 
   it('accepts a custom width', () => {

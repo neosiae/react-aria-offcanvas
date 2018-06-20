@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import focusTrap from '../helpers/focusTrap';
 import * as focusManager from '../helpers/focusManager';
 import createStyles from '../helpers/styles';
 
+const TAB_KEY = 9;
 const ESC_KEY = 27;
 
 export default class OffCanvas extends Component {
@@ -31,6 +33,8 @@ export default class OffCanvas extends Component {
     closeOnOverlayClick: PropTypes.bool,
     trapFocusAfterOpen: PropTypes.bool,
     returnFocusAfterClose: PropTypes.bool,
+    focusFirstChildAfterOpen: PropTypes.bool,
+    focusThisChildAfterOpen: PropTypes.string,
     style: PropTypes.shape({
       overlay: PropTypes.object,
       content: PropTypes.object,
@@ -88,20 +92,24 @@ export default class OffCanvas extends Component {
       focusManager.focusLater();
     }
 
-    if (this.props.trapFocusAfterOpen) {
-      focusManager.setFocusTrap(this.content);
-    }
-
-    this.focusContent();
+    this.getInitialFocus();
   };
 
   close = () => {
     if (this.props.returnFocusAfterClose) {
       focusManager.returnFocus();
     }
+  };
 
-    if (this.props.trapFocusAfterOpen) {
-      focusManager.removeFocusTrap();
+  getInitialFocus = () => {
+    const { focusFirstChildAfterOpen, focusThisChildAfterOpen } = this.props;
+
+    if (focusFirstChildAfterOpen) {
+      focusManager.focusFirstChild(this.content);
+    } else if (focusThisChildAfterOpen) {
+      focusManager.focusChild(this.content, focusThisChildAfterOpen);
+    } else {
+      this.focusContent();
     }
   };
 
@@ -111,13 +119,19 @@ export default class OffCanvas extends Component {
     }
   };
 
-  handleOnOverlayClick = event => {
+  handleOverlayClick = event => {
     if (this.props.closeOnOverlayClick && event.target === this.overlay) {
       this.parentHandlesClose(event);
     }
   };
 
-  handleOnEscDown = event => {
+  handleKeyDown = event => {
+    if (this.props.trapFocusAfterOpen) {
+      if (event.keyCode === TAB_KEY) {
+        focusTrap(event, this.content);
+      }
+    }
+
     if (this.props.closeOnEsc && event.keyCode === ESC_KEY) {
       this.parentHandlesClose(event);
     }
@@ -180,14 +194,14 @@ export default class OffCanvas extends Component {
         ref={this.setOverlayRef}
         style={styles.overlay}
         className={overlayClassName}
-        onClick={this.handleOnOverlayClick}
+        onClick={this.handleOverlayClick}
         data-testid="overlay"
       >
         <div
           ref={this.setContentRef}
           style={styles.content}
           className={className}
-          onKeyDown={this.handleOnEscDown}
+          onKeyDown={this.handleKeyDown}
           role={role}
           aria-label={label}
           aria-labelledby={labelledby}

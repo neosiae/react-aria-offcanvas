@@ -21,8 +21,8 @@ export default class App extends Component {
         <button onClick={this.open}>Open</button>
         <OffCanvas
           isOpen={this.state.isOpen}
-          returnFocusAfterClose={this.props.returnFocusAfterClose}
           onClose={this.close}
+          returnFocusAfterClose={this.props.returnFocusAfterClose}
         >
           <h1>Testing...</h1>
         </OffCanvas>
