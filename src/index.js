@@ -1,3 +1,3 @@
-import OffCanvas from './components/OffCanvas';
+import OffCanvas from './OffCanvas';
 
 export default OffCanvas;

@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import focusTrap from '../helpers/focusTrap';
-import * as focusManager from '../helpers/focusManager';
-import createStyles from '../helpers/styles';
+import { runEventHandlerOnce } from './helpers/events';
+import focusTrap from './helpers/focusTrap';
+import {
+  focusLater,
+  returnFocus,
+  focusFirstChild,
+  focusChild,
+} from './helpers/focusManager';
+import {
+  hasClassName,
+  createStyles,
+  createPushStyles,
+  applyInitialPushStyles,
+  shouldHideHorizontalScrollbar,
+} from './helpers/styles';
 
 const TAB_KEY = 9;
 const ESC_KEY = 27;
@@ -28,6 +40,7 @@ export default class OffCanvas extends Component {
     width: PropTypes.string,
     height: PropTypes.string,
     position: PropTypes.oneOf(['left', 'right', 'top', 'bottom']),
+    mainContainerSelector: PropTypes.string,
     onClose: PropTypes.func,
     closeOnEsc: PropTypes.bool,
     closeOnOverlayClick: PropTypes.bool,
@@ -36,6 +49,7 @@ export default class OffCanvas extends Component {
     focusFirstChildAfterOpen: PropTypes.bool,
     focusThisChildAfterOpen: PropTypes.string,
     style: PropTypes.shape({
+      container: PropTypes.object,
       overlay: PropTypes.object,
       content: PropTypes.object,
     }),
@@ -64,18 +78,42 @@ export default class OffCanvas extends Component {
   };
 
   static extraStyles = {
+    container: {
+      transition: 'transform 0.25s ease-out',
+    },
     overlay: {
       background: 'rgba(255, 255, 255, 0.5)',
     },
     content: {
       background: 'rgba(0, 0, 0, 0.1)',
-      transition: '0.25s ease-out',
+      transition: 'transform 0.25s ease-out',
     },
   };
 
   componentDidMount() {
-    if (this.props.isOpen) {
-      this.open();
+    const {
+      isOpen,
+      width,
+      height,
+      position,
+      mainContainerSelector,
+    } = this.props;
+
+    this.mainContainer = document.querySelector(mainContainerSelector);
+
+    // Remove the extra styles when the main container has a className
+    if (hasClassName(this.mainContainer)) {
+      OffCanvas.extraStyles.container = {};
+    }
+
+    if (isOpen) {
+      this.setInitialFocus();
+      if (mainContainerSelector) {
+        // If the initial state is set to true, this is the right time to apply
+        // some of the push styles to the main container.
+        applyInitialPushStyles(this.mainContainer, width, height, position);
+        shouldHideHorizontalScrollbar(true);
+      }
     }
   }
 
@@ -88,26 +126,46 @@ export default class OffCanvas extends Component {
   }
 
   open = () => {
-    if (this.props.returnFocusAfterClose) {
-      focusManager.focusLater();
+    const { returnFocusAfterClose } = this.props;
+
+    if (returnFocusAfterClose) {
+      focusLater();
     }
 
-    this.getInitialFocus();
+    runEventHandlerOnce(this.content, 'transitionend', () => {
+      this.setInitialFocus();
+    });
+
+    shouldHideHorizontalScrollbar(true);
   };
 
   close = () => {
-    if (this.props.returnFocusAfterClose) {
-      focusManager.returnFocus();
+    const { mainContainerSelector, returnFocusAfterClose } = this.props;
+
+    if (returnFocusAfterClose) {
+      if (mainContainerSelector) {
+        // If the Open button is off the screen, returning focus immediately
+        // breaks the transition. Transitionend event ensures that the animation
+        // has enough time to finish.
+        runEventHandlerOnce(this.mainContainer, 'transitionend', () => {
+          returnFocus();
+          shouldHideHorizontalScrollbar(false);
+        });
+      } else {
+        runEventHandlerOnce(this.content, 'transitionend', () => {
+          returnFocus();
+        });
+      }
     }
   };
 
-  getInitialFocus = () => {
+  setInitialFocus = () => {
     const { focusFirstChildAfterOpen, focusThisChildAfterOpen } = this.props;
 
     if (focusFirstChildAfterOpen) {
-      focusManager.focusFirstChild(this.content);
+      focusFirstChild(this.content);
     } else if (focusThisChildAfterOpen) {
-      focusManager.focusChild(this.content, focusThisChildAfterOpen);
+      focusChild(this.content, focusThisChildAfterOpen);
     } else {
       this.focusContent();
     }
@@ -147,26 +205,28 @@ export default class OffCanvas extends Component {
 
   focusContent = () => this.content && this.content.focus();
 
-  getExtraStyles = () => {
-    const { className, overlayClassName } = this.props;
+  buildStyles = () => {
+    const {
+      isOpen,
+      width,
+      height,
+      position,
+      mainContainerSelector,
+      style,
+      className,
+      overlayClassName,
+    } = this.props;
 
-    // Remove extra styles when classNames are passed
-    const overlayStyles = overlayClassName ? {} : OffCanvas.extraStyles.overlay;
-    const contentStyles = className ? {} : OffCanvas.extraStyles.content;
-
-    return {
-      overlay: overlayStyles,
-      content: contentStyles,
+    const extra = {
+      container: OffCanvas.extraStyles.container,
+      // Remove the extra styles when classNames are passed
+      overlay: overlayClassName ? {} : OffCanvas.extraStyles.overlay,
+      content: className ? {} : OffCanvas.extraStyles.content,
     };
-  };
 
-  getStyles = () => {
-    const { isOpen, width, height, position, style } = this.props;
-    const extraStyles = this.getExtraStyles();
-
-    const styles = createStyles(
+    const main = createStyles(
       OffCanvas.defaultStyles,
-      extraStyles,
+      extra,
       isOpen,
       width,
       height,
@@ -174,7 +234,17 @@ export default class OffCanvas extends Component {
       style,
     );
 
-    return styles;
+    const applyPushStyles = mainContainerSelector
+      ? createPushStyles(
+          OffCanvas.extraStyles.container,
+          isOpen,
+          width,
+          height,
+          position,
+        )
+      : null;
+
+    return { main, applyPushStyles };
   };
 
   render() {
@@ -187,19 +257,23 @@ export default class OffCanvas extends Component {
       overlayClassName,
     } = this.props;
 
-    const styles = this.getStyles();
+    const styles = this.buildStyles();
+
+    if (styles.applyPushStyles) {
+      styles.applyPushStyles(this.mainContainer);
+    }
 
     return (
       <div
         ref={this.setOverlayRef}
-        style={styles.overlay}
+        style={styles.main.overlay}
         className={overlayClassName}
         onClick={this.handleOverlayClick}
         data-testid="overlay"
       >
         <div
           ref={this.setContentRef}
-          style={styles.content}
+          style={styles.main.content}
           className={className}
           onKeyDown={this.handleKeyDown}
           role={role}

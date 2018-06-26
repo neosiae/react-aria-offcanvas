@@ -4,7 +4,7 @@ const TAB_KEY = 9;
 
 const isTabKey = event => event.keyCode === TAB_KEY;
 
-// Don't let focus to leave tabbable elements
+// Traps focus in an element.
 const focusTrap = (event, element) => {
   const tabbable = setTabbable(element);
 

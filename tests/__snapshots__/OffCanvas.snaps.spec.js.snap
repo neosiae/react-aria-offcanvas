@@ -27,17 +27,13 @@ exports[`OffCanvas renders correctly when closed 1`] = `
     role={undefined}
     style={
       Object {
-        "MozTransform": "translateX(-100%)",
-        "MsTransform": "translateX(-100%)",
-        "OTransform": "translateX(-100%)",
-        "WebkitTransform": "translateX(-100%)",
         "background": "rgba(0, 0, 0, 0.1)",
         "height": "300px",
         "left": "0",
         "outline": 0,
         "position": "fixed",
         "transform": "translateX(-100%)",
-        "transition": "0.25s ease-out",
+        "transition": "transform 0.25s ease-out",
         "transitionProperty": "",
         "visibility": "hidden",
         "width": "300px",
@@ -76,17 +72,13 @@ exports[`OffCanvas renders correctly when open 1`] = `
     role={undefined}
     style={
       Object {
-        "MozTransform": "",
-        "MsTransform": "",
-        "OTransform": "",
-        "WebkitTransform": "",
         "background": "rgba(0, 0, 0, 0.1)",
         "height": "300px",
         "left": "0",
         "outline": 0,
         "position": "fixed",
         "transform": "",
-        "transition": "0.25s ease-out",
+        "transition": "transform 0.25s ease-out",
         "transitionProperty": "transform",
         "visibility": "visible",
         "width": "300px",

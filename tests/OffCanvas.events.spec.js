@@ -10,13 +10,14 @@ describe('OffCanvas', () => {
     it('returns focus to the last focused element by default', () => {
       const { getByText, getByTestId } = renderIntoDocument(<App />);
       const button = getByText('Open');
+      const content = getByTestId('content');
 
       button.focus();
       fireEvent.click(button);
       button.blur();
+      fireEvent.keyDown(content, { key: 'ESC', keyCode: 27 });
+      fireEvent.transitionEnd(content);
 
-      expect(document.activeElement).toBe(getByTestId('content'));
-      fireEvent.click(getByTestId('overlay'));
       expect(document.activeElement).toBe(button);
     });
 
@@ -25,13 +26,13 @@ describe('OffCanvas', () => {
         <App returnFocusAfterClose={false} />,
       );
       const button = getByText('Open');
+      const content = getByTestId('content');
 
       button.focus();
       fireEvent.click(button);
       button.blur();
+      fireEvent.keyDown(content, { key: 'ESC', keyCode: 27 });
 
-      expect(document.activeElement).toBe(getByTestId('content'));
-      fireEvent.click(getByTestId('overlay'));
       expect(document.activeElement).not.toBe(button);
     });
   });
@@ -53,7 +54,9 @@ describe('OffCanvas', () => {
 
       const first = getByText('First');
       const second = getByText('Second');
-      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
+
+      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9 });
+
       expect(document.activeElement).toBe(first);
     });
 
@@ -73,7 +76,9 @@ describe('OffCanvas', () => {
 
       const first = getByText('First');
       const second = getByText('Second');
-      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9, which: 9 });
+
+      fireEvent.keyDown(second, { key: 'TAB', keyCode: 9 });
+
       expect(document.activeElement).not.toBe(first);
     });
   });
@@ -84,8 +89,10 @@ describe('OffCanvas', () => {
       const { getByTestId } = renderIntoDocument(
         <OffCanvas isOpen={true} onClose={handleClose} />,
       );
+      const overlay = getByTestId('overlay');
 
-      fireEvent.click(getByTestId('overlay'));
+      fireEvent.click(overlay);
+
       expect(handleClose).toHaveBeenCalled();
     });
 
@@ -98,8 +105,10 @@ describe('OffCanvas', () => {
           onClose={handleClose}
         />,
       );
+      const overlay = getByTestId('overlay');
 
-      fireEvent.click(getByTestId('overlay'));
+      fireEvent.click(overlay);
+
       expect(handleClose).not.toHaveBeenCalled();
     });
   });
@@ -110,8 +119,10 @@ describe('OffCanvas', () => {
       const { getByTestId } = renderIntoDocument(
         <OffCanvas isOpen={true} onClose={handleClose} />,
       );
+      const content = getByTestId('content');
 
-      fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
+      fireEvent.keyDown(content, { key: 'ESC', keyCode: 27 });
+
       expect(handleClose).toHaveBeenCalled();
     });
 
@@ -120,8 +131,10 @@ describe('OffCanvas', () => {
       const { getByTestId } = renderIntoDocument(
         <OffCanvas isOpen={true} closeOnEsc={false} onClose={handleClose} />,
       );
+      const content = getByTestId('content');
 
-      fireEvent.keyDown(getByTestId('content'), { keyCode: 27 });
+      fireEvent.keyDown(content, { key: 'ESC', keyCode: 27 });
+
       expect(handleClose).not.toHaveBeenCalled();
     });
   });

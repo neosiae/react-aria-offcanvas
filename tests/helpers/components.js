@@ -16,13 +16,25 @@ export default class App extends Component {
   };
 
   render() {
+    const {
+      isOpen,
+      mainContainerSelector,
+      returnFocusAfterClose,
+      style,
+      containerClassName,
+    } = this.props;
+
     return (
       <Fragment>
-        <button onClick={this.open}>Open</button>
+        <div data-testid="main" id="main" className={containerClassName}>
+          <button onClick={this.open}>Open</button>
+        </div>
         <OffCanvas
-          isOpen={this.state.isOpen}
+          isOpen={isOpen ? isOpen : this.state.isOpen}
+          mainContainerSelector={mainContainerSelector}
           onClose={this.close}
-          returnFocusAfterClose={this.props.returnFocusAfterClose}
+          returnFocusAfterClose={returnFocusAfterClose}
+          style={style}
         >
           <h1>Testing...</h1>
         </OffCanvas>
