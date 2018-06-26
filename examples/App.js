@@ -38,7 +38,7 @@ const styles = {
 
 export default class App extends Component {
   state = {
-    isOpen: false,
+    isOpen: true,
   };
 
   open = () => {
@@ -52,7 +52,7 @@ export default class App extends Component {
   render() {
     return (
       <Fragment>
-        <div style={styles.container}>
+        <div id="main" style={styles.container}>
           <h1>react-aria-offcanvas</h1>
           <p style={styles.subtitle}>
             Accessible Off-Canvas component for React.js
@@ -64,19 +64,21 @@ export default class App extends Component {
             aria-expanded={this.state.isOpen}
             onClick={this.open}
           >
-            Click here
+            Open
           </button>
           <p style={styles.github}>
             <a
               target="_blank"
               href="https://github.com/neosiae/react-aria-offcanvas"
             >
-              View source on Github
+              View source on GitHub
             </a>
           </p>
         </div>
         <OffCanvas
           isOpen={this.state.isOpen}
+          height="100%"
+          mainContainerSelector="#main"
           onClose={this.close}
           labelledby="menu-button"
         >
