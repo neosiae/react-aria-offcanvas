@@ -1,11 +1,14 @@
 const tabbable = [
+  'a[href]',
+  'area[href]',
   'input:not([disabled])',
   'select:not([disabled])',
-  'a[href]',
   'textarea:not([disabled])',
   'button:not([disabled])',
+  'iframe',
   'object',
-  '[tabindex]',
+  'embed',
+  '[contenteditable]',
 ];
 
 const findTabbable = element => {
