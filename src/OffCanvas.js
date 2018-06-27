@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { runEventHandlerOnce } from './helpers/events';
+import runEventHandlerOnce from 'run-event-handler-once';
 import focusTrap from './helpers/focusTrap';
 import {
   focusLater,
@@ -18,6 +18,10 @@ import {
 
 const TAB_KEY = 9;
 const ESC_KEY = 27;
+const EVENT_LISTENER_OPTIONS = {
+  add: { capture: false },
+  remove: { capture: false },
+};
 
 export default class OffCanvas extends Component {
   static defaultProps = {
@@ -132,9 +136,14 @@ export default class OffCanvas extends Component {
       focusLater();
     }
 
-    runEventHandlerOnce(this.content, 'transitionend', () => {
-      this.setInitialFocus();
-    });
+    runEventHandlerOnce(
+      this.content,
+      'transitionend',
+      () => {
+        this.setInitialFocus();
+      },
+      EVENT_LISTENER_OPTIONS,
+    );
 
     shouldHideHorizontalScrollbar(true);
   };
@@ -147,14 +156,24 @@ export default class OffCanvas extends Component {
         // If the Open button is off the screen, returning focus immediately
         // breaks the transition. Transitionend event ensures that the animation
         // has enough time to finish.
-        runEventHandlerOnce(this.mainContainer, 'transitionend', () => {
-          returnFocus();
-          shouldHideHorizontalScrollbar(false);
-        });
+        runEventHandlerOnce(
+          this.mainContainer,
+          'transitionend',
+          () => {
+            returnFocus();
+            shouldHideHorizontalScrollbar(false);
+          },
+          EVENT_LISTENER_OPTIONS,
+        );
       } else {
-        runEventHandlerOnce(this.content, 'transitionend', () => {
-          returnFocus();
-        });
+        runEventHandlerOnce(
+          this.content,
+          'transitionend',
+          () => {
+            returnFocus();
+          },
+          EVENT_LISTENER_OPTIONS,
+        );
       }
     }
   };
