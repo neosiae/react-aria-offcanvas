@@ -108,3 +108,7 @@ The only required property for the component is `isOpen`, which controls whether
 | `role` | `string` | | Custom role for OffCanvas. |
 | `label` | `string` | | Custom aria-label for OffCanvas. |
 | `labelledby` | `string` | | Custom aria-labelledby for OffCanvas. |
+
+## License
+
+MIT
