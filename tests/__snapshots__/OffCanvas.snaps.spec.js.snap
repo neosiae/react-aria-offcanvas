@@ -35,7 +35,6 @@ exports[`OffCanvas renders correctly when closed 1`] = `
         "transform": "translateX(-100%)",
         "transition": "transform 0.25s ease-out",
         "transitionProperty": "",
-        "visibility": "hidden",
         "width": "300px",
         "zIndex": "1000",
       }
@@ -80,7 +79,6 @@ exports[`OffCanvas renders correctly when open 1`] = `
         "transform": "",
         "transition": "transform 0.25s ease-out",
         "transitionProperty": "transform",
-        "visibility": "visible",
         "width": "300px",
         "zIndex": "1000",
       }

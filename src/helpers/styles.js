@@ -32,6 +32,12 @@ const setPushTransformValue = (width, height, position) => {
 // Checks whether an element has a className.
 export const hasClassName = element => element && element.classList.length > 0;
 
+export const shouldShowContent = (content, isOpen) => {
+  if (content) {
+    content.style.visibility = isOpen ? 'visible' : 'hidden';
+  }
+};
+
 export const createStyles = (
   defaultStyles,
   extraStyles,
@@ -59,7 +65,6 @@ export const createStyles = (
       transform: isOpen ? '' : setContentTransformValue(position),
       ...customStyles.content,
       // !important
-      visibility: isOpen ? 'visible' : 'hidden',
       // Off-Canvas element should be able to receive focus immediately.
       // https://allyjs.io/tutorials/focusing-in-animated-ui.html#remedy-2-caveat
       transitionProperty: isOpen ? 'transform' : '',

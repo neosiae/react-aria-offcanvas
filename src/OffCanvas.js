@@ -12,6 +12,7 @@ import {
   hasClassName,
   createStyles,
   createPushStyles,
+  shouldShowContent,
   applyInitialPushStyles,
   shouldHideHorizontalScrollbar,
 } from './helpers/styles';
@@ -103,11 +104,16 @@ export default class OffCanvas extends Component {
       mainContainerSelector,
     } = this.props;
 
-    this.mainContainer = document.querySelector(mainContainerSelector);
+    shouldShowContent(this.content, isOpen);
 
-    // Remove the extra styles when the main container has a className
-    if (hasClassName(this.mainContainer)) {
-      OffCanvas.extraStyles.container = {};
+    if (mainContainerSelector) {
+      // Get the element that should be pushed
+      this.mainContainer = document.querySelector(mainContainerSelector);
+
+      // Remove the extra styles when the main container has a className
+      if (hasClassName(this.mainContainer)) {
+        OffCanvas.extraStyles.container = {};
+      }
     }
 
     if (isOpen) {
@@ -132,6 +138,8 @@ export default class OffCanvas extends Component {
   open = () => {
     const { returnFocusAfterClose } = this.props;
 
+    shouldShowContent(this.content, true);
+
     if (returnFocusAfterClose) {
       focusLater();
     }
@@ -153,14 +161,15 @@ export default class OffCanvas extends Component {
 
     if (returnFocusAfterClose) {
       if (mainContainerSelector) {
-        // If the Open button is off the screen, returning focus immediately
-        // breaks the transition. Transitionend event ensures that the animation
-        // has enough time to finish.
         runEventHandlerOnce(
           this.mainContainer,
           'transitionend',
           () => {
+            // If the Open button is off the screen, returning focus
+            // immediately breaks the transition. Transitionend event ensures
+            // that the  animation has enough time to finish.
             returnFocus();
+            shouldShowContent(this.content, false);
             shouldHideHorizontalScrollbar(false);
           },
           EVENT_LISTENER_OPTIONS,
@@ -171,6 +180,7 @@ export default class OffCanvas extends Component {
           'transitionend',
           () => {
             returnFocus();
+            shouldShowContent(this.content, false);
           },
           EVENT_LISTENER_OPTIONS,
         );
