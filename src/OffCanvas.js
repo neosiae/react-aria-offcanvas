@@ -167,7 +167,7 @@ export default class OffCanvas extends Component {
           () => {
             // If the Open button is off the screen, returning focus
             // immediately breaks the transition. Transitionend event ensures
-            // that the  animation has enough time to finish.
+            // that the animation has enough time to finish.
             returnFocus();
             shouldShowContent(this.content, false);
             shouldHideHorizontalScrollbar(false);
