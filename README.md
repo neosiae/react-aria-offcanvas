@@ -1,5 +1,5 @@
 # react-aria-offcanvas
-[![Build Status](https://travis-ci.com/neosiae/react-aria-offcanvas.svg?branch=master)](https://travis-ci.com/neosiae/react-aria-offcanvas) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.com/neosiae/react-aria-offcanvas.svg?branch=master)](https://travis-ci.com/neosiae/react-aria-offcanvas) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![dependency status](https://depsjs.xyz/status/package/react-aria-offcanvas/status.svg)](https://depsjs.xyz/package/react-aria-offcanvas)
 
 Accessible Off-Canvas component for React.js
 
