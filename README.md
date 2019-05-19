@@ -1,5 +1,6 @@
 # react-aria-offcanvas
-[![Build Status](https://travis-ci.com/neosiae/react-aria-offcanvas.svg?branch=master)](https://travis-ci.com/neosiae/react-aria-offcanvas) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier) [![dependency status](https://depsjs.xyz/status/package/react-aria-offcanvas/status.svg)](https://depsjs.xyz/package/react-aria-offcanvas)
+
+![npm](https://img.shields.io/npm/v/react-aria-offcanvas.svg?style=flat-square) ![Travis (.com) branch](https://img.shields.io/travis/com/neosiae/react-aria-offcanvas/master.svg?style=flat-square) ![npm](https://img.shields.io/npm/dw/react-aria-offcanvas.svg?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/min/react-aria-offcanvas.svg?style=flat-square) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Accessible Off-Canvas component for React.js
 
@@ -84,30 +85,30 @@ export default class App extends Component {
 }
 ```
 
-## Props 
+## Props
 
 The only required property for the component is `isOpen`, which controls whether the component is displayed or not.
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `isOpen` | `bool` | `false` | Open or close OffCanvas. |
-| `width` | `string` | `300px` | The width of OffCanvas. | 
-| `height` | `string` | `300px` | The height of OffCanvas. |
-| `position` | `string` | `left` | Position OffCanvas to the `left`, `right`, `top` or `bottom`. |
-| `mainContainerSelector` | `string` | | Allow `OffCanvas` to push your page. Pass a valid CSS selector of an element that should be pushed. |
-| `onClose` | `func` | | Callback fired when the overlay is clicked or esc key is pressed. |
-| `closeOnEsc` | `bool` | `true` | Close OffCanvas on esc key. |
-| `closeOnOverlayClick` | `bool` | `true` | Close OffCanvas on overlay click. | 
-| `trapFocusAfterOpen` | `bool` | `true` | Trap focus when OffCanvas is open. |
-| `returnFocusAfterClose` | `bool` | `true` | Return focus to the element that had focus before opening OffCanvas. |
-| `focusFirstChildAfterOpen` | `bool` | | Set initial focus on the first focusable child inside OffCanvas. |
-| `focusThisChildAfterOpen` | `string` | | Set initial focus on a specific child inside OffCanvas. Pass a valid CSS selector of an element that should receive initial focus.
-| `style` | `object` | `{ overlay: {}, content: {} }` | Inline styles object. It has two keys: `overlay` - overlay styles and `content` - OffCanvas styles. |
-| `className` | `string` | | Custom className for OffCanvas. |
-| `overlayClassName` | `string` | | Custom className for the overlay. | 
-| `role` | `string` | | Custom role for OffCanvas. |
-| `label` | `string` | | Custom aria-label for OffCanvas. |
-| `labelledby` | `string` | | Custom aria-labelledby for OffCanvas. |
+| Prop                       | Type     | Default                        | Description                                                                                                                        |
+| -------------------------- | -------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `isOpen`                   | `bool`   | `false`                        | Open or close OffCanvas.                                                                                                           |
+| `width`                    | `string` | `300px`                        | The width of OffCanvas.                                                                                                            |
+| `height`                   | `string` | `300px`                        | The height of OffCanvas.                                                                                                           |
+| `position`                 | `string` | `left`                         | Position OffCanvas to the `left`, `right`, `top` or `bottom`.                                                                      |
+| `mainContainerSelector`    | `string` |                                | Allow `OffCanvas` to push your page. Pass a valid CSS selector of an element that should be pushed.                                |
+| `onClose`                  | `func`   |                                | Callback fired when the overlay is clicked or esc key is pressed.                                                                  |
+| `closeOnEsc`               | `bool`   | `true`                         | Close OffCanvas on esc key.                                                                                                        |
+| `closeOnOverlayClick`      | `bool`   | `true`                         | Close OffCanvas on overlay click.                                                                                                  |
+| `trapFocusAfterOpen`       | `bool`   | `true`                         | Trap focus when OffCanvas is open.                                                                                                 |
+| `returnFocusAfterClose`    | `bool`   | `true`                         | Return focus to the element that had focus before opening OffCanvas.                                                               |
+| `focusFirstChildAfterOpen` | `bool`   |                                | Set initial focus on the first focusable child inside OffCanvas.                                                                   |
+| `focusThisChildAfterOpen`  | `string` |                                | Set initial focus on a specific child inside OffCanvas. Pass a valid CSS selector of an element that should receive initial focus. |
+| `style`                    | `object` | `{ overlay: {}, content: {} }` | Inline styles object. It has two keys: `overlay` - overlay styles and `content` - OffCanvas styles.                                |
+| `className`                | `string` |                                | Custom className for OffCanvas.                                                                                                    |
+| `overlayClassName`         | `string` |                                | Custom className for the overlay.                                                                                                  |
+| `role`                     | `string` |                                | Custom role for OffCanvas.                                                                                                         |
+| `label`                    | `string` |                                | Custom aria-label for OffCanvas.                                                                                                   |
+| `labelledby`               | `string` |                                | Custom aria-labelledby for OffCanvas.                                                                                              |
 
 ## License
 
