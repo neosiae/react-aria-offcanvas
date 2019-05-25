@@ -1,19 +1,19 @@
-import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-aria-offcanvas';
+import React, { Component, Fragment } from 'react'
+import OffCanvas from '../../src/index'
 
 /* eslint react/prop-types: 0 */
 export default class App extends Component {
   state = {
     isOpen: false,
-  };
+  }
 
   open = () => {
-    this.setState({ isOpen: true });
-  };
+    this.setState({ isOpen: true })
+  }
 
   close = () => {
-    this.setState({ isOpen: false });
-  };
+    this.setState({ isOpen: false })
+  }
 
   render() {
     const {
@@ -22,7 +22,7 @@ export default class App extends Component {
       returnFocusAfterClose,
       style,
       containerClassName,
-    } = this.props;
+    } = this.props
 
     return (
       <Fragment>
@@ -39,6 +39,6 @@ export default class App extends Component {
           <h1>Testing...</h1>
         </OffCanvas>
       </Fragment>
-    );
+    )
   }
 }

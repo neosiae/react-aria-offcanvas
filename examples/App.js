@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-aria-offcanvas';
+import React, { Component, Fragment } from 'react'
+import OffCanvas from '../src/index'
 
 const Navigation = () => (
   <nav id="menu">
@@ -21,7 +21,7 @@ const Navigation = () => (
       </li>
     </ul>
   </nav>
-);
+)
 
 const styles = {
   container: {
@@ -34,20 +34,20 @@ const styles = {
   github: {
     marginTop: '2.5rem',
   },
-};
+}
 
 export default class App extends Component {
   state = {
     isOpen: false,
-  };
+  }
 
   open = () => {
-    this.setState({ isOpen: true });
-  };
+    this.setState({ isOpen: true })
+  }
 
   close = () => {
-    this.setState({ isOpen: false });
-  };
+    this.setState({ isOpen: false })
+  }
 
   render() {
     return (
@@ -86,6 +86,6 @@ export default class App extends Component {
           <Navigation />
         </OffCanvas>
       </Fragment>
-    );
+    )
   }
 }
