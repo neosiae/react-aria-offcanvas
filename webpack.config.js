@@ -1,5 +1,5 @@
-const path = require('path');
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -14,8 +14,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/react'],
         },
       },
     ],
@@ -26,12 +27,7 @@ module.exports = {
       filename: './index.html',
     }),
   ],
-  resolve: {
-    alias: {
-      'react-aria-offcanvas': path.resolve(__dirname, 'src/index'),
-    },
-  },
   devServer: {
     contentBase: path.join(__dirname, 'examples'),
   },
-};
+}

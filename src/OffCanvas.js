@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import runEventHandlerOnce from 'run-event-handler-once';
-import focusTrap from './helpers/focusTrap';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import runEventHandlerOnce from 'run-event-handler-once'
+import focusTrap from './helpers/focusTrap'
 import {
   focusLater,
   returnFocus,
   focusFirstChild,
   focusChild,
-} from './helpers/focusManager';
+} from './helpers/focusManager'
 import {
   hasClassName,
   createStyles,
@@ -15,14 +15,14 @@ import {
   shouldShowContent,
   applyInitialPushStyles,
   shouldHideHorizontalScrollbar,
-} from './helpers/styles';
+} from './helpers/styles'
 
-const TAB_KEY = 9;
-const ESC_KEY = 27;
+const TAB_KEY = 9
+const ESC_KEY = 27
 const EVENT_LISTENER_OPTIONS = {
   add: { capture: false },
   remove: { capture: false },
-};
+}
 
 export default class OffCanvas extends Component {
   static defaultProps = {
@@ -38,7 +38,7 @@ export default class OffCanvas extends Component {
       overlay: {},
       content: {},
     },
-  };
+  }
 
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
@@ -64,7 +64,7 @@ export default class OffCanvas extends Component {
     label: PropTypes.string,
     labelledby: PropTypes.string,
     children: PropTypes.node,
-  };
+  }
 
   static defaultStyles = {
     overlay: {
@@ -80,7 +80,7 @@ export default class OffCanvas extends Component {
       zIndex: '1000',
       outline: 0,
     },
-  };
+  }
 
   static extraStyles = {
     container: {
@@ -93,7 +93,7 @@ export default class OffCanvas extends Component {
       background: 'rgba(0, 0, 0, 0.1)',
       transition: 'transform 0.25s ease-out',
     },
-  };
+  }
 
   componentDidMount() {
     const {
@@ -102,62 +102,62 @@ export default class OffCanvas extends Component {
       height,
       position,
       mainContainerSelector,
-    } = this.props;
+    } = this.props
 
-    shouldShowContent(this.content, isOpen);
+    shouldShowContent(this.content, isOpen)
 
     if (mainContainerSelector) {
       // Get the element that should be pushed
-      this.mainContainer = document.querySelector(mainContainerSelector);
+      this.mainContainer = document.querySelector(mainContainerSelector)
 
       // Remove the extra styles when the main container has a className
       if (hasClassName(this.mainContainer)) {
-        OffCanvas.extraStyles.container = {};
+        OffCanvas.extraStyles.container = {}
       }
     }
 
     if (isOpen) {
-      this.setInitialFocus();
+      this.setInitialFocus()
       if (mainContainerSelector) {
         // If the initial state is set to true, this is the right time to apply
         // some of the push styles to the main container.
-        applyInitialPushStyles(this.mainContainer, width, height, position);
-        shouldHideHorizontalScrollbar(true);
+        applyInitialPushStyles(this.mainContainer, width, height, position)
+        shouldHideHorizontalScrollbar(true)
       }
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.isOpen && !prevProps.isOpen) {
-      this.open();
+      this.open()
     } else if (!this.props.isOpen && prevProps.isOpen) {
-      this.close();
+      this.close()
     }
   }
 
   open = () => {
-    const { returnFocusAfterClose } = this.props;
+    const { returnFocusAfterClose } = this.props
 
-    shouldShowContent(this.content, true);
+    shouldShowContent(this.content, true)
 
     if (returnFocusAfterClose) {
-      focusLater();
+      focusLater()
     }
 
     runEventHandlerOnce(
       this.content,
       'transitionend',
       () => {
-        this.setInitialFocus();
+        this.setInitialFocus()
       },
       EVENT_LISTENER_OPTIONS,
-    );
+    )
 
-    shouldHideHorizontalScrollbar(true);
-  };
+    shouldHideHorizontalScrollbar(true)
+  }
 
   close = () => {
-    const { mainContainerSelector, returnFocusAfterClose } = this.props;
+    const { mainContainerSelector, returnFocusAfterClose } = this.props
 
     if (returnFocusAfterClose) {
       if (mainContainerSelector) {
@@ -168,71 +168,71 @@ export default class OffCanvas extends Component {
             // If the Open button is off the screen, returning focus
             // immediately breaks the transition. Transitionend event ensures
             // that the animation has enough time to finish.
-            returnFocus();
-            shouldShowContent(this.content, false);
-            shouldHideHorizontalScrollbar(false);
+            returnFocus()
+            shouldShowContent(this.content, false)
+            shouldHideHorizontalScrollbar(false)
           },
           EVENT_LISTENER_OPTIONS,
-        );
+        )
       } else {
         runEventHandlerOnce(
           this.content,
           'transitionend',
           () => {
-            returnFocus();
-            shouldShowContent(this.content, false);
+            returnFocus()
+            shouldShowContent(this.content, false)
           },
           EVENT_LISTENER_OPTIONS,
-        );
+        )
       }
     }
-  };
+  }
 
   setInitialFocus = () => {
-    const { focusFirstChildAfterOpen, focusThisChildAfterOpen } = this.props;
+    const { focusFirstChildAfterOpen, focusThisChildAfterOpen } = this.props
 
     if (focusFirstChildAfterOpen) {
-      focusFirstChild(this.content);
+      focusFirstChild(this.content)
     } else if (focusThisChildAfterOpen) {
-      focusChild(this.content, focusThisChildAfterOpen);
+      focusChild(this.content, focusThisChildAfterOpen)
     } else {
-      this.focusContent();
+      this.focusContent()
     }
-  };
+  }
 
   parentHandlesClose = event => {
     if (this.props.onClose) {
-      this.props.onClose(event);
+      this.props.onClose(event)
     }
-  };
+  }
 
   handleOverlayClick = event => {
     if (this.props.closeOnOverlayClick && event.target === this.overlay) {
-      this.parentHandlesClose(event);
+      this.parentHandlesClose(event)
     }
-  };
+  }
 
   handleKeyDown = event => {
     if (this.props.trapFocusAfterOpen) {
       if (event.keyCode === TAB_KEY) {
-        focusTrap(event, this.content);
+        focusTrap(event, this.content)
       }
     }
 
     if (this.props.closeOnEsc && event.keyCode === ESC_KEY) {
-      this.parentHandlesClose(event);
+      this.parentHandlesClose(event)
     }
-  };
+  }
 
   setOverlayRef = overlay => {
-    this.overlay = overlay;
-  };
+    this.overlay = overlay
+  }
 
   setContentRef = content => {
-    this.content = content;
-  };
+    this.content = content
+  }
 
-  focusContent = () => this.content && this.content.focus();
+  focusContent = () => this.content && this.content.focus()
 
   buildStyles = () => {
     const {
@@ -244,14 +244,14 @@ export default class OffCanvas extends Component {
       style,
       className,
       overlayClassName,
-    } = this.props;
+    } = this.props
 
     const extra = {
       container: OffCanvas.extraStyles.container,
       // Remove the extra styles when classNames are passed
       overlay: overlayClassName ? {} : OffCanvas.extraStyles.overlay,
       content: className ? {} : OffCanvas.extraStyles.content,
-    };
+    }
 
     const main = createStyles(
       OffCanvas.defaultStyles,
@@ -261,7 +261,7 @@ export default class OffCanvas extends Component {
       height,
       position,
       style,
-    );
+    )
 
     const applyPushStyles = mainContainerSelector
       ? createPushStyles(
@@ -271,10 +271,10 @@ export default class OffCanvas extends Component {
           height,
           position,
         )
-      : null;
+      : null
 
-    return { main, applyPushStyles };
-  };
+    return { main, applyPushStyles }
+  }
 
   render() {
     const {
@@ -284,12 +284,12 @@ export default class OffCanvas extends Component {
       labelledby,
       className,
       overlayClassName,
-    } = this.props;
+    } = this.props
 
-    const styles = this.buildStyles();
+    const styles = this.buildStyles()
 
     if (styles.applyPushStyles) {
-      styles.applyPushStyles(this.mainContainer);
+      styles.applyPushStyles(this.mainContainer)
     }
 
     return (
@@ -315,6 +315,6 @@ export default class OffCanvas extends Component {
           {this.props.children}
         </div>
       </div>
-    );
+    )
   }
 }

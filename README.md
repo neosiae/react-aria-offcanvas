@@ -21,8 +21,8 @@ Or via yarn:
 ## Usage
 
 ```javascript
-import React, { Component, Fragment } from 'react';
-import OffCanvas from 'react-aria-offcanvas';
+import React, { Component, Fragment } from 'react'
+import OffCanvas from 'react-aria-offcanvas'
 
 const Navigation = () => (
   <nav id="menu">
@@ -44,20 +44,20 @@ const Navigation = () => (
       </li>
     </ul>
   </nav>
-);
+)
 
 export default class App extends Component {
   state = {
     isOpen: false,
-  };
+  }
 
   open = () => {
-    this.setState({ isOpen: true });
-  };
+    this.setState({ isOpen: true })
+  }
 
   close = () => {
-    this.setState({ isOpen: false });
-  };
+    this.setState({ isOpen: false })
+  }
 
   render() {
     return (
@@ -80,7 +80,7 @@ export default class App extends Component {
           <Navigation />
         </OffCanvas>
       </Fragment>
-    );
+    )
   }
 }
 ```

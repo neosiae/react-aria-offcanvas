@@ -1,42 +1,42 @@
 // Sets the vertical or horizontal position of an element.
 const setPosition = position => {
-  let obj = {};
-  obj[position] = '0';
-  return obj;
-};
+  let obj = {}
+  obj[position] = '0'
+  return obj
+}
 
 const setContentTransformValue = position => {
   if (position === 'left') {
-    return `translateX(-100%)`;
+    return `translateX(-100%)`
   } else if (position === 'right') {
-    return `translateX(100%)`;
+    return `translateX(100%)`
   } else if (position === 'top') {
-    return `translateY(-100%)`;
+    return `translateY(-100%)`
   } else {
-    return `translateY(100%)`;
+    return `translateY(100%)`
   }
-};
+}
 
 const setPushTransformValue = (width, height, position) => {
   if (position === 'left') {
-    return `translateX(${width})`;
+    return `translateX(${width})`
   } else if (position === 'right') {
-    return `translateX(-${width})`;
+    return `translateX(-${width})`
   } else if (position === 'top') {
-    return `translateY(${height})`;
+    return `translateY(${height})`
   } else {
-    return `translateY(-${height})`;
+    return `translateY(-${height})`
   }
-};
+}
 
 // Checks whether an element has a className.
-export const hasClassName = element => element && element.classList.length > 0;
+export const hasClassName = element => element && element.classList.length > 0
 
 export const shouldShowContent = (content, isOpen) => {
   if (content) {
-    content.style.visibility = isOpen ? 'visible' : 'hidden';
+    content.style.visibility = isOpen ? 'visible' : 'hidden'
   }
-};
+}
 
 export const createStyles = (
   defaultStyles,
@@ -47,7 +47,7 @@ export const createStyles = (
   position,
   customStyles,
 ) => {
-  const positionProperty = setPosition(position);
+  const positionProperty = setPosition(position)
 
   return {
     overlay: {
@@ -69,8 +69,8 @@ export const createStyles = (
       // https://allyjs.io/tutorials/focusing-in-animated-ui.html#remedy-2-caveat
       transitionProperty: isOpen ? 'transform' : '',
     },
-  };
-};
+  }
+}
 
 export const createPushStyles = (
   extraStyles,
@@ -82,26 +82,26 @@ export const createPushStyles = (
   const styles = {
     ...extraStyles,
     transform: isOpen ? setPushTransformValue(width, height, position) : '',
-  };
+  }
 
   return function(element) {
     if (element) {
       // Apply the push styles
       for (const property of Object.keys(styles)) {
-        element.style[property] = styles[property];
+        element.style[property] = styles[property]
       }
     }
-  };
-};
+  }
+}
 
 export const applyInitialPushStyles = (element, width, height, position) => {
   if (element) {
-    element.style.transform = setPushTransformValue(width, height, position);
+    element.style.transform = setPushTransformValue(width, height, position)
   }
-};
+}
 
 // Shows/hides the horizontal scrollbar.
 export const shouldHideHorizontalScrollbar = isOpen => {
-  const body = document.querySelector('body');
-  body.style.overflowX = isOpen ? 'hidden' : '';
-};
+  const body = document.querySelector('body')
+  body.style.overflowX = isOpen ? 'hidden' : ''
+}

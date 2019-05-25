@@ -2,7 +2,6 @@
 
 exports[`OffCanvas renders correctly when closed 1`] = `
 <div
-  className={undefined}
   data-testid="overlay"
   onClick={[Function]}
   style={
@@ -19,12 +18,8 @@ exports[`OffCanvas renders correctly when closed 1`] = `
 >
   <div
     aria-hidden={true}
-    aria-label={undefined}
-    aria-labelledby={undefined}
-    className={undefined}
     data-testid="content"
     onKeyDown={[Function]}
-    role={undefined}
     style={
       Object {
         "background": "rgba(0, 0, 0, 0.1)",
@@ -46,7 +41,6 @@ exports[`OffCanvas renders correctly when closed 1`] = `
 
 exports[`OffCanvas renders correctly when open 1`] = `
 <div
-  className={undefined}
   data-testid="overlay"
   onClick={[Function]}
   style={
@@ -63,12 +57,8 @@ exports[`OffCanvas renders correctly when open 1`] = `
 >
   <div
     aria-hidden={false}
-    aria-label={undefined}
-    aria-labelledby={undefined}
-    className={undefined}
     data-testid="content"
     onKeyDown={[Function]}
-    role={undefined}
     style={
       Object {
         "background": "rgba(0, 0, 0, 0.1)",
