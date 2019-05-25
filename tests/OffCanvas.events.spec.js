@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderIntoDocument, fireEvent, cleanup } from 'react-testing-library'
+import { render, fireEvent, cleanup } from 'react-testing-library'
 import OffCanvas from '../src/index'
 import App from './helpers/components'
 
@@ -8,7 +8,7 @@ describe('OffCanvas', () => {
 
   describe('returnFocusAfterClose', () => {
     it('returns focus to the last focused element by default', () => {
-      const { getByText, getByTestId } = renderIntoDocument(<App />)
+      const { getByText, getByTestId } = render(<App />)
       const button = getByText('Open')
       const content = getByTestId('content')
 
@@ -22,7 +22,7 @@ describe('OffCanvas', () => {
     })
 
     it('does not return focus to the last focused element if set to false', () => {
-      const { getByText, getByTestId } = renderIntoDocument(
+      const { getByText, getByTestId } = render(
         <App returnFocusAfterClose={false} />,
       )
       const button = getByText('Open')
@@ -46,7 +46,7 @@ describe('OffCanvas', () => {
         </div>
       )
 
-      const { getByText } = renderIntoDocument(
+      const { getByText } = render(
         <OffCanvas isOpen={true}>
           <Buttons />
         </OffCanvas>,
@@ -68,7 +68,7 @@ describe('OffCanvas', () => {
         </div>
       )
 
-      const { getByText } = renderIntoDocument(
+      const { getByText } = render(
         <OffCanvas isOpen={true} trapFocusAfterOpen={false}>
           <Buttons />
         </OffCanvas>,
@@ -86,7 +86,7 @@ describe('OffCanvas', () => {
   describe('closeOnOverlayClick', () => {
     it('should close on overlay click by default', () => {
       const handleClose = jest.fn()
-      const { getByTestId } = renderIntoDocument(
+      const { getByTestId } = render(
         <OffCanvas isOpen={true} onClose={handleClose} />,
       )
       const overlay = getByTestId('overlay')
@@ -98,7 +98,7 @@ describe('OffCanvas', () => {
 
     it('should not close on overlay click if set to false', () => {
       const handleClose = jest.fn()
-      const { getByTestId } = renderIntoDocument(
+      const { getByTestId } = render(
         <OffCanvas
           isOpen={true}
           closeOnOverlayClick={false}
@@ -116,7 +116,7 @@ describe('OffCanvas', () => {
   describe('closeOnEsc', () => {
     it('should close on ESC key by default', () => {
       const handleClose = jest.fn()
-      const { getByTestId } = renderIntoDocument(
+      const { getByTestId } = render(
         <OffCanvas isOpen={true} onClose={handleClose} />,
       )
       const content = getByTestId('content')
@@ -128,7 +128,7 @@ describe('OffCanvas', () => {
 
     it('should not close on ESC key if set to false', () => {
       const handleClose = jest.fn()
-      const { getByTestId } = renderIntoDocument(
+      const { getByTestId } = render(
         <OffCanvas isOpen={true} closeOnEsc={false} onClose={handleClose} />,
       )
       const content = getByTestId('content')

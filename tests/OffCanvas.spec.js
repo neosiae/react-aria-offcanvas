@@ -1,11 +1,6 @@
 import React from 'react'
 import OffCanvas from '../src/index'
-import {
-  render,
-  renderIntoDocument,
-  fireEvent,
-  cleanup,
-} from 'react-testing-library'
+import { render, fireEvent, cleanup } from 'react-testing-library'
 import { getContent, extractNumber } from './helpers/tests'
 import App from './helpers/components'
 
@@ -45,7 +40,7 @@ describe('OffCanvas', () => {
       </div>
     )
 
-    const { getByText } = renderIntoDocument(
+    const { getByText } = render(
       <OffCanvas isOpen={true} focusThisChildAfterOpen="#second">
         <Buttons />
       </OffCanvas>,
@@ -93,7 +88,7 @@ describe('OffCanvas', () => {
   })
 
   it('pushes the main container if mainContainerSelector is defined', () => {
-    const { getByText, getByTestId } = renderIntoDocument(
+    const { getByText, getByTestId } = render(
       <App mainContainerSelector="#main" />,
     )
     const button = getByText('Open')

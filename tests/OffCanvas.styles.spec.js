@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderIntoDocument, cleanup, fireEvent } from 'react-testing-library'
+import { render, cleanup, fireEvent } from 'react-testing-library'
 import { getOverlay, getContent } from './helpers/tests'
 import OffCanvas from '../src/index'
 import App from './helpers/components'
@@ -9,7 +9,7 @@ describe('OffCanvas', () => {
 
   describe('container', () => {
     it('removes extra styles when a custom className is passed', () => {
-      const { getByTestId, getByText } = renderIntoDocument(
+      const { getByTestId, getByText } = render(
         <App
           mainContainerSelector="#main"
           containerClassName="containerClassName"
