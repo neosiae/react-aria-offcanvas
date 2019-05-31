@@ -1,11 +1,37 @@
 import React from 'react'
 import OffCanvas from '../src/index'
 import { render, fireEvent, cleanup } from 'react-testing-library'
+import { bindElementToQueries } from 'dom-testing-library'
 import { getContent, extractNumber } from './helpers/tests'
+import 'jest-dom/extend-expect'
 import App from './helpers/components'
+
+const bodyUtils = bindElementToQueries(document.body)
+
+function renderPortal() {
+  const renderUtils = render(<App />)
+  const portalNode = bodyUtils.getByTestId('offcanvas-portal')
+  return {
+    portalNode,
+    ...renderUtils,
+    ...bindElementToQueries(portalNode),
+  }
+}
 
 describe('OffCanvas', () => {
   afterEach(cleanup)
+
+  it('renders a text in a portal', () => {
+    const { getByText } = renderPortal()
+    expect(getByText('Testing')).toBeInTheDocument()
+  })
+
+  it('removes the portal from the document on unmount', () => {
+    const { unmount, portalNode } = renderPortal()
+    expect(document.body.contains(portalNode)).toBe(true)
+    unmount()
+    expect(document.body.contains(portalNode)).toBe(false)
+  })
 
   it('focuses the OffCanvas content when open', () => {
     const content = getContent(<OffCanvas isOpen={true} />)
