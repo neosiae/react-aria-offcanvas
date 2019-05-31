@@ -36,7 +36,7 @@ export default class App extends Component {
           returnFocusAfterClose={returnFocusAfterClose}
           style={style}
         >
-          <h1>Testing...</h1>
+          <h1>Testing</h1>
         </OffCanvas>
       </Fragment>
     )

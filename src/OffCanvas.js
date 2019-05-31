@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import runEventHandlerOnce from 'run-event-handler-once'
 import focusTrap from './helpers/focusTrap'
@@ -25,6 +26,11 @@ const EVENT_LISTENER_OPTIONS = {
 }
 
 export default class OffCanvas extends Component {
+  constructor(props) {
+    super(props)
+    this.createOffCanvasRoot()
+  }
+
   static defaultProps = {
     isOpen: false,
     width: '300px',
@@ -276,6 +282,20 @@ export default class OffCanvas extends Component {
     return { main, applyPushStyles }
   }
 
+  createOffCanvasRoot = () => {
+    this.offCanvasRoot = document.createElement('div')
+    this.offCanvasRoot.setAttribute('id', 'offcanvas-root')
+    this.offCanvasRoot.dataset.testid = 'offcanvas-portal'
+    document.body.appendChild(this.offCanvasRoot)
+  }
+
+  removeOffCanvasRoot = () =>
+    this.offCanvasRoot && document.body.removeChild(this.offCanvasRoot)
+
+  componentWillUnmount() {
+    this.removeOffCanvasRoot()
+  }
+
   render() {
     const {
       isOpen,
@@ -292,17 +312,17 @@ export default class OffCanvas extends Component {
       styles.applyPushStyles(this.mainContainer)
     }
 
-    return (
+    return ReactDOM.createPortal(
       <div
         ref={this.setOverlayRef}
-        style={styles.main.overlay}
+        style={styles && styles.main.overlay}
         className={overlayClassName}
         onClick={this.handleOverlayClick}
         data-testid="overlay"
       >
         <div
           ref={this.setContentRef}
-          style={styles.main.content}
+          style={styles && styles.main.content}
           className={className}
           onKeyDown={this.handleKeyDown}
           role={role}
@@ -314,7 +334,8 @@ export default class OffCanvas extends Component {
         >
           {this.props.children}
         </div>
-      </div>
+      </div>,
+      this.offCanvasRoot,
     )
   }
 }
