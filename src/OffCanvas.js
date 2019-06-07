@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import runEventHandlerOnce from 'run-event-handler-once'
 import focusTrap from './helpers/focusTrap'
+import { canUseDOM, canUseRoot } from './helpers/static'
 import {
   focusLater,
   returnFocus,
@@ -219,13 +220,12 @@ export default class OffCanvas extends Component {
   }
 
   handleKeyDown = event => {
-    if (this.props.trapFocusAfterOpen) {
-      if (event.keyCode === TAB_KEY) {
-        focusTrap(event, this.content)
-      }
+    if (this.props.trapFocusAfterOpen && event.keyCode === TAB_KEY) {
+      focusTrap(event, this.content)
     }
 
     if (this.props.closeOnEsc && event.keyCode === ESC_KEY) {
+      event.stopPropagation()
       this.parentHandlesClose(event)
     }
   }
@@ -283,11 +283,13 @@ export default class OffCanvas extends Component {
   }
 
   createOffCanvasRoot = () => {
-    const firstScriptTag = document.body.getElementsByTagName('script')[0]
-    this.offCanvasRoot = document.createElement('div')
-    this.offCanvasRoot.setAttribute('id', 'offcanvas-root')
-    this.offCanvasRoot.dataset.testid = 'offcanvas-portal'
-    document.body.insertBefore(this.offCanvasRoot, firstScriptTag)
+    if (canUseDOM) {
+      const firstScriptTag = document.body.getElementsByTagName('script')[0]
+      this.offCanvasRoot = document.createElement('div')
+      this.offCanvasRoot.setAttribute('id', 'offcanvas-root')
+      this.offCanvasRoot.dataset.testid = 'offcanvas-portal'
+      document.body.insertBefore(this.offCanvasRoot, firstScriptTag)
+    }
   }
 
   removeOffCanvasRoot = () =>
@@ -313,30 +315,33 @@ export default class OffCanvas extends Component {
       styles.applyPushStyles(this.mainContainer)
     }
 
-    return ReactDOM.createPortal(
-      <div
-        ref={this.setOverlayRef}
-        style={styles && styles.main.overlay}
-        className={overlayClassName}
-        onClick={this.handleOverlayClick}
-        data-testid="overlay"
-      >
+    return (
+      canUseRoot(this.offCanvasRoot) &&
+      ReactDOM.createPortal(
         <div
-          ref={this.setContentRef}
-          style={styles && styles.main.content}
-          className={className}
-          onKeyDown={this.handleKeyDown}
-          role={role}
-          aria-label={label}
-          aria-labelledby={labelledby}
-          aria-hidden={!isOpen}
-          tabIndex="-1"
-          data-testid="content"
+          ref={this.setOverlayRef}
+          style={styles && styles.main.overlay}
+          className={overlayClassName}
+          onClick={this.handleOverlayClick}
+          data-testid="overlay"
         >
-          {this.props.children}
-        </div>
-      </div>,
-      this.offCanvasRoot,
+          <div
+            ref={this.setContentRef}
+            style={styles && styles.main.content}
+            className={className}
+            onKeyDown={this.handleKeyDown}
+            role={role}
+            aria-label={label}
+            aria-labelledby={labelledby}
+            aria-hidden={!isOpen}
+            tabIndex="-1"
+            data-testid="content"
+          >
+            {this.props.children}
+          </div>
+        </div>,
+        this.offCanvasRoot,
+      )
     )
   }
 }
