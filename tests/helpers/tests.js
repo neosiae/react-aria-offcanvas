@@ -1,4 +1,4 @@
-import { render } from 'react-testing-library'
+import { render } from '@testing-library/react'
 
 export const getContent = element => {
   const { getByTestId } = render(element)
