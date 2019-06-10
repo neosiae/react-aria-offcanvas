@@ -284,11 +284,10 @@ export default class OffCanvas extends Component {
 
   createOffCanvasRoot = () => {
     if (canUseDOM) {
-      const firstScriptTag = document.body.getElementsByTagName('script')[0]
       this.offCanvasRoot = document.createElement('div')
       this.offCanvasRoot.setAttribute('id', 'offcanvas-root')
       this.offCanvasRoot.dataset.testid = 'offcanvas-portal'
-      document.body.insertBefore(this.offCanvasRoot, firstScriptTag)
+      document.body.appendChild(this.offCanvasRoot)
     }
   }
 
