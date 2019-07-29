@@ -6,7 +6,7 @@ Accessible Off-Canvas component for React.js
 
 ## Demo
 
-https://neosiae.github.io/react-aria-offcanvas
+https://neojs-dev.github.io/react-aria-offcanvas/
 
 ## Installation
 
