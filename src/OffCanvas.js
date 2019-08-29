@@ -17,6 +17,7 @@ import {
   shouldShowContent,
   applyInitialPushStyles,
   shouldHideHorizontalScrollbar,
+  shouldLockBodyScroll
 } from './helpers/styles'
 
 const TAB_KEY = 9
@@ -85,6 +86,7 @@ export default class OffCanvas extends Component {
     content: {
       position: 'fixed',
       zIndex: '1000',
+      overflowY: 'auto',
       outline: 0,
     },
   }
@@ -130,6 +132,7 @@ export default class OffCanvas extends Component {
         // some of the push styles to the main container.
         applyInitialPushStyles(this.mainContainer, width, height, position)
         shouldHideHorizontalScrollbar(true)
+        shouldLockBodyScroll(true)
       }
     }
   }
@@ -161,6 +164,8 @@ export default class OffCanvas extends Component {
     )
 
     shouldHideHorizontalScrollbar(true)
+    // Lock Body scroll on component update
+    shouldLockBodyScroll(true)
   }
 
   close = () => {
@@ -175,9 +180,11 @@ export default class OffCanvas extends Component {
             // If the Open button is off the screen, returning focus
             // immediately breaks the transition. Transitionend event ensures
             // that the animation has enough time to finish.
+            // then use the lock body scroll method to lock body scroll
             returnFocus()
             shouldShowContent(this.content, false)
             shouldHideHorizontalScrollbar(false)
+            shouldLockBodyScroll(false)
           },
           EVENT_LISTENER_OPTIONS,
         )
