@@ -17,8 +17,14 @@ const Navigation = () => (
         <a href="#m-i-4">Menu Item 4</a>
       </li>
       <li>
-        <a href="#m-i-5">Menu Item 5</a>
-      </li>
+        <a href="#m-i-6">Menu Item 6</a>
+      </li> 
+      <li>
+        <a href="#m-i-7">Menu Item 7</a>
+      </li> 
+      <li>
+        <a href="#m-i-8">Menu Item 8</a>
+      </li> 
     </ul>
   </nav>
 )
@@ -27,6 +33,7 @@ const styles = {
   container: {
     textAlign: 'center',
     marginTop: '2.5rem',
+    fontFamily: ' -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
   },
   subtitle: {
     fontSize: '1.5rem',
