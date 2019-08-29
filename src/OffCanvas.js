@@ -17,7 +17,7 @@ import {
   shouldShowContent,
   applyInitialPushStyles,
   shouldHideHorizontalScrollbar,
-  shouldLockBodyScroll
+  shouldLockBodyScroll,
 } from './helpers/styles'
 
 const TAB_KEY = 9
