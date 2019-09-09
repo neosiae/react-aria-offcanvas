@@ -1,6 +1,6 @@
 # react-aria-offcanvas
 
-![npm](https://img.shields.io/npm/v/react-aria-offcanvas.svg?style=flat-square) ![Travis (.org) branch](https://img.shields.io/travis/neojs-dev/react-aria-offcanvas/master?style=flat-square) ![npm](https://img.shields.io/npm/dw/react-aria-offcanvas.svg?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/min/react-aria-offcanvas.svg?style=flat-square) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+![npm](https://img.shields.io/npm/v/react-aria-offcanvas.svg?style=flat-square) ![Travis (.org) branch](https://img.shields.io/travis/neosiae/react-aria-offcanvas/master?style=flat-square) ![npm](https://img.shields.io/npm/dw/react-aria-offcanvas.svg?style=flat-square) ![npm bundle size](https://img.shields.io/bundlephobia/min/react-aria-offcanvas.svg?style=flat-square) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 Accessible Off-Canvas component for React.js
 
