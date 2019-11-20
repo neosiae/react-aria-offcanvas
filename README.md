@@ -99,6 +99,7 @@ The only required property for the component is `isOpen`, which controls whether
 | `onClose`                  | `func`   |                                | Callback fired when the overlay is clicked or esc key is pressed.                                                                  |
 | `closeOnEsc`               | `bool`   | `true`                         | Close OffCanvas on esc key.                                                                                                        |
 | `closeOnOverlayClick`      | `bool`   | `true`                         | Close OffCanvas on overlay click.                                                                                                  |
+| `lockBodyAfterOpen`        | `bool`   | `true`                         | Lock body overflow on menu open                                                                                               |
 | `trapFocusAfterOpen`       | `bool`   | `true`                         | Trap focus when OffCanvas is open.                                                                                                 |
 | `returnFocusAfterClose`    | `bool`   | `true`                         | Return focus to the element that had focus before opening OffCanvas.                                                               |
 | `focusFirstChildAfterOpen` | `bool`   |                                | Set initial focus on the first focusable child inside OffCanvas.                                                                   |

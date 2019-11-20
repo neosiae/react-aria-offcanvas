@@ -20,6 +20,7 @@ import {
   shouldLockBodyScroll,
 } from './helpers/styles'
 
+
 const TAB_KEY = 9
 const ESC_KEY = 27
 const EVENT_LISTENER_OPTIONS = {
@@ -41,6 +42,7 @@ export default class OffCanvas extends Component {
     closeOnEsc: true,
     closeOnOverlayClick: true,
     trapFocusAfterOpen: true,
+    lockBodyAfterOpen: true,
     returnFocusAfterClose: true,
     style: {
       overlay: {},
@@ -59,6 +61,7 @@ export default class OffCanvas extends Component {
     closeOnOverlayClick: PropTypes.bool,
     trapFocusAfterOpen: PropTypes.bool,
     returnFocusAfterClose: PropTypes.bool,
+    lockBodyAfterOpen: PropTypes.bool,
     focusFirstChildAfterOpen: PropTypes.bool,
     focusThisChildAfterOpen: PropTypes.string,
     style: PropTypes.shape({
@@ -111,6 +114,7 @@ export default class OffCanvas extends Component {
       height,
       position,
       mainContainerSelector,
+      lockBodyAfterOpen
     } = this.props
 
     shouldShowContent(this.content, isOpen)
@@ -132,7 +136,7 @@ export default class OffCanvas extends Component {
         // some of the push styles to the main container.
         applyInitialPushStyles(this.mainContainer, width, height, position)
         shouldHideHorizontalScrollbar(true)
-        shouldLockBodyScroll(true)
+        lockBodyAfterOpen && shouldLockBodyScroll(true)
       }
     }
   }
@@ -146,7 +150,7 @@ export default class OffCanvas extends Component {
   }
 
   open = () => {
-    const { returnFocusAfterClose } = this.props
+    const { returnFocusAfterClose, lockBodyAfterOpen } = this.props
 
     shouldShowContent(this.content, true)
 
@@ -165,7 +169,7 @@ export default class OffCanvas extends Component {
 
     shouldHideHorizontalScrollbar(true)
     // Lock Body scroll on component update
-    shouldLockBodyScroll(true)
+    lockBodyAfterOpen && shouldLockBodyScroll(true)
   }
 
   close = () => {
