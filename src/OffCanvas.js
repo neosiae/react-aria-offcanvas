@@ -20,7 +20,6 @@ import {
   shouldLockBodyScroll,
 } from './helpers/styles'
 
-
 const TAB_KEY = 9
 const ESC_KEY = 27
 const EVENT_LISTENER_OPTIONS = {
@@ -114,7 +113,7 @@ export default class OffCanvas extends Component {
       height,
       position,
       mainContainerSelector,
-      lockBodyAfterOpen
+      lockBodyAfterOpen,
     } = this.props
 
     shouldShowContent(this.content, isOpen)
