@@ -17,6 +17,7 @@ import {
   shouldShowContent,
   applyInitialPushStyles,
   shouldHideHorizontalScrollbar,
+  shouldLockBodyScroll,
 } from './helpers/styles'
 
 const TAB_KEY = 9
@@ -40,6 +41,7 @@ export default class OffCanvas extends Component {
     closeOnEsc: true,
     closeOnOverlayClick: true,
     trapFocusAfterOpen: true,
+    lockBodyAfterOpen: true,
     returnFocusAfterClose: true,
     style: {
       overlay: {},
@@ -58,6 +60,7 @@ export default class OffCanvas extends Component {
     closeOnOverlayClick: PropTypes.bool,
     trapFocusAfterOpen: PropTypes.bool,
     returnFocusAfterClose: PropTypes.bool,
+    lockBodyAfterOpen: PropTypes.bool,
     focusFirstChildAfterOpen: PropTypes.bool,
     focusThisChildAfterOpen: PropTypes.string,
     style: PropTypes.shape({
@@ -85,6 +88,7 @@ export default class OffCanvas extends Component {
     content: {
       position: 'fixed',
       zIndex: '1000',
+      overflowY: 'auto',
       outline: 0,
     },
   }
@@ -109,6 +113,7 @@ export default class OffCanvas extends Component {
       height,
       position,
       mainContainerSelector,
+      lockBodyAfterOpen,
     } = this.props
 
     shouldShowContent(this.content, isOpen)
@@ -130,6 +135,7 @@ export default class OffCanvas extends Component {
         // some of the push styles to the main container.
         applyInitialPushStyles(this.mainContainer, width, height, position)
         shouldHideHorizontalScrollbar(true)
+        lockBodyAfterOpen && shouldLockBodyScroll(true)
       }
     }
   }
@@ -143,7 +149,7 @@ export default class OffCanvas extends Component {
   }
 
   open = () => {
-    const { returnFocusAfterClose } = this.props
+    const { returnFocusAfterClose, lockBodyAfterOpen } = this.props
 
     shouldShowContent(this.content, true)
 
@@ -161,6 +167,8 @@ export default class OffCanvas extends Component {
     )
 
     shouldHideHorizontalScrollbar(true)
+    // Lock Body scroll on component update
+    lockBodyAfterOpen && shouldLockBodyScroll(true)
   }
 
   close = () => {
@@ -175,9 +183,11 @@ export default class OffCanvas extends Component {
             // If the Open button is off the screen, returning focus
             // immediately breaks the transition. Transitionend event ensures
             // that the animation has enough time to finish.
+            // then use the lock body scroll method to lock body scroll
             returnFocus()
             shouldShowContent(this.content, false)
             shouldHideHorizontalScrollbar(false)
+            shouldLockBodyScroll(false)
           },
           EVENT_LISTENER_OPTIONS,
         )
