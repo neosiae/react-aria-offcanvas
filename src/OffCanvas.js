@@ -198,6 +198,7 @@ export default class OffCanvas extends Component {
           () => {
             returnFocus()
             shouldShowContent(this.content, false)
+            shouldLockBodyScroll(false)
           },
           EVENT_LISTENER_OPTIONS,
         )
