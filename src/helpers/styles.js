@@ -109,5 +109,5 @@ export const shouldHideHorizontalScrollbar = isOpen => {
 // should lock the body scroll when open
 export const shouldLockBodyScroll = isOpen => {
   const body = document.querySelector('body')
-  body.style.overflowY = isOpen ? 'hidden' : 'inherit'
+  body.style.overflowY = isOpen ? 'hidden' : ''
 }
