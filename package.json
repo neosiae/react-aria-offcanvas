@@ -37,8 +37,8 @@
     "run-event-handler-once": "^1.0.2"
   },
   "peerDependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react": "^16.4.2 || ^17.0.0",
+    "react-dom": "^16.4.2 || ^17.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
