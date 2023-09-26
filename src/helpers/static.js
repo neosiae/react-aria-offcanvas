@@ -4,4 +4,4 @@ export const canUseDOM = !!(
   window.document.createElement
 )
 
-export const canUseRoot = root => !!root
+export const canUseRoot = (root) => !!root

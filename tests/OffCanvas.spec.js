@@ -4,7 +4,7 @@
 
 import React from 'react'
 import OffCanvas from '../src/index'
-import "@testing-library/jest-dom";
+import '@testing-library/jest-dom'
 import { render, fireEvent, cleanup } from '@testing-library/react'
 import { getQueriesForElement } from '@testing-library/dom'
 import { getContent, extractNumber } from './helpers/tests'

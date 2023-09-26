@@ -11,14 +11,14 @@ const tabbable = [
   'video[controls]',
 ]
 
-const findTabbable = element => {
+const findTabbable = (element) => {
   if (element) {
     const tabbableElements = element.querySelectorAll(tabbable.join(','))
     return tabbableElements
   }
 }
 
-export const setTabbable = element => {
+export const setTabbable = (element) => {
   if (element) {
     const tabbableElements = findTabbable(element)
 

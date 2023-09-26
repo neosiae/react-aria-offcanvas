@@ -2,7 +2,7 @@ import { setTabbable } from './tabbable'
 
 const TAB_KEY = 9
 
-const isTabKey = event => event.keyCode === TAB_KEY
+const isTabKey = (event) => event.keyCode === TAB_KEY
 
 // Traps focus in an element.
 const focusTrap = (event, element) => {

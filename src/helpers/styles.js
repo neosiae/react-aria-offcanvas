@@ -1,11 +1,11 @@
 // Sets the vertical or horizontal position of an element.
-const setPosition = position => {
+const setPosition = (position) => {
   let obj = {}
   obj[position] = '0'
   return obj
 }
 
-const setContentTransformValue = position => {
+const setContentTransformValue = (position) => {
   if (position === 'left') {
     return `translateX(-100%)`
   } else if (position === 'right') {
@@ -30,7 +30,7 @@ const setPushTransformValue = (width, height, position) => {
 }
 
 // Checks whether an element has a className.
-export const hasClassName = element => element && element.classList.length > 0
+export const hasClassName = (element) => element && element.classList.length > 0
 
 export const shouldShowContent = (content, isOpen) => {
   if (content) {
@@ -84,7 +84,7 @@ export const createPushStyles = (
     transform: isOpen ? setPushTransformValue(width, height, position) : '',
   }
 
-  return function(element) {
+  return function (element) {
     if (element) {
       // Apply the push styles
       for (const property of Object.keys(styles)) {
@@ -101,13 +101,13 @@ export const applyInitialPushStyles = (element, width, height, position) => {
 }
 
 // Shows/hides the horizontal scrollbar.
-export const shouldHideHorizontalScrollbar = isOpen => {
+export const shouldHideHorizontalScrollbar = (isOpen) => {
   const body = document.querySelector('body')
   body.style.overflowX = isOpen ? 'hidden' : ''
 }
 
 // should lock the body scroll when open
-export const shouldLockBodyScroll = isOpen => {
+export const shouldLockBodyScroll = (isOpen) => {
   const body = document.querySelector('body')
   body.style.overflowY = isOpen ? 'hidden' : ''
 }
