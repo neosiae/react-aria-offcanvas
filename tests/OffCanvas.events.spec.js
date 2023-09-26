@@ -1,5 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react'
-import { render, fireEvent, cleanup } from '@testing-library/react'
+import { render, cleanup, fireEvent } from '@testing-library/react'
 import OffCanvas from '../src/index'
 import App from './helpers/components'
 

@@ -1,12 +1,16 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react'
 import OffCanvas from '../src/index'
+import "@testing-library/jest-dom";
 import { render, fireEvent, cleanup } from '@testing-library/react'
-import { bindElementToQueries } from '@testing-library/dom'
+import { getQueriesForElement } from '@testing-library/dom'
 import { getContent, extractNumber } from './helpers/tests'
-import 'jest-dom/extend-expect'
 import App from './helpers/components'
 
-const bodyUtils = bindElementToQueries(document.body)
+const bodyUtils = getQueriesForElement(document.body)
 
 function renderPortal() {
   const renderUtils = render(<App />)
@@ -14,7 +18,7 @@ function renderPortal() {
   return {
     portalNode,
     ...renderUtils,
-    ...bindElementToQueries(portalNode),
+    ...getQueriesForElement(portalNode),
   }
 }
 
