@@ -13,7 +13,7 @@ export const returnFocus = () => {
   }
 }
 
-export const focusFirstChild = element => {
+export const focusFirstChild = (element) => {
   const tabbable = setTabbable(element)
   tabbable.first.focus()
 }

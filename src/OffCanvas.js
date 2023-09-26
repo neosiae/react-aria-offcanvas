@@ -219,19 +219,19 @@ export default class OffCanvas extends Component {
     }
   }
 
-  parentHandlesClose = event => {
+  parentHandlesClose = (event) => {
     if (this.props.onClose) {
       this.props.onClose(event)
     }
   }
 
-  handleOverlayClick = event => {
+  handleOverlayClick = (event) => {
     if (this.props.closeOnOverlayClick && event.target === this.overlay) {
       this.parentHandlesClose(event)
     }
   }
 
-  handleKeyDown = event => {
+  handleKeyDown = (event) => {
     if (this.props.trapFocusAfterOpen && event.keyCode === TAB_KEY) {
       focusTrap(event, this.content)
     }
@@ -242,11 +242,11 @@ export default class OffCanvas extends Component {
     }
   }
 
-  setOverlayRef = overlay => {
+  setOverlayRef = (overlay) => {
     this.overlay = overlay
   }
 
-  setContentRef = content => {
+  setContentRef = (content) => {
     this.content = content
   }
 
@@ -313,14 +313,8 @@ export default class OffCanvas extends Component {
   }
 
   render() {
-    const {
-      isOpen,
-      role,
-      label,
-      labelledby,
-      className,
-      overlayClassName,
-    } = this.props
+    const { isOpen, role, label, labelledby, className, overlayClassName } =
+      this.props
 
     const styles = this.buildStyles()
 

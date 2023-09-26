@@ -8,7 +8,7 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended"
   ],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "plugins": ["react", "prettier", "jsx-a11y"],
   "rules": {
     "prettier/prettier": "error",

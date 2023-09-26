@@ -27,7 +27,5 @@ module.exports = {
       filename: './index.html',
     }),
   ],
-  devServer: {
-    contentBase: path.join(__dirname, 'examples'),
-  },
+  devServer: { },
 }

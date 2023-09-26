@@ -5,7 +5,7 @@ exports[`OffCanvas renders correctly when closed 1`] = `
   data-testid="overlay"
   onClick={[Function]}
   style={
-    Object {
+    {
       "background": "rgba(255, 255, 255, 0.5)",
       "height": "100%",
       "left": 0,
@@ -21,7 +21,7 @@ exports[`OffCanvas renders correctly when closed 1`] = `
     data-testid="content"
     onKeyDown={[Function]}
     style={
-      Object {
+      {
         "background": "rgba(0, 0, 0, 0.1)",
         "height": "300px",
         "left": "0",
@@ -45,7 +45,7 @@ exports[`OffCanvas renders correctly when open 1`] = `
   data-testid="overlay"
   onClick={[Function]}
   style={
-    Object {
+    {
       "background": "rgba(255, 255, 255, 0.5)",
       "height": "100%",
       "left": 0,
@@ -61,7 +61,7 @@ exports[`OffCanvas renders correctly when open 1`] = `
     data-testid="content"
     onKeyDown={[Function]}
     style={
-      Object {
+      {
         "background": "rgba(0, 0, 0, 0.1)",
         "height": "300px",
         "left": "0",
